@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Портфолио Unity-разработчика. Разработка игр и интерактивных приложений на Unity.">
+    <meta name="keywords" content="Unity, разработчик, портфолио, геймдев, C#, игры, разработка игр">
+
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Preconnect для внешних CDN -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+    <!-- Highlight.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" defer></script>
+
+    <!-- Critical CSS: встроен в head для мгновенного рендеринга -->
+    <style>
+        /* ----- CSS Variables ----- */
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #111118;
+            --bg-card: #1a1a24;
+            --text-primary: #f0f0f5;
+            --text-secondary: #a0a0b0;
+            --accent: #6366f1;
+            --accent-hover: #818cf8;
+            --accent-gradient: linear-gradient(135deg, #6366f1, #4facfe);
+            --border: #2a2a3a;
+            --font-main: 'Inter', sans-serif;
+            --font-code: 'JetBrains Mono', monospace;
+            --max-width: 1200px;
+            --radius: 12px;
+            --transition: 0.3s ease;
+        }
+        [data-theme="light"] {
+            --bg-primary: #f8f9fa;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --text-primary: #1a1a2e;
+            --text-secondary: #6b7280;
+            --border: #e5e7eb;
+        }
+        /* ----- Reset & Base ----- */
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+        body{font-family:'Inter',sans-serif;font-size:16px;line-height:1.6;color:var(--text-primary);background:var(--bg-primary);min-height:100vh}
+        body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(99,102,241,0.04)1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,0.04)1px,transparent 1px);background-size:40px 40px;mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,black 20%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,black 20%,transparent 70%)}
+        ::selection{background:var(--accent);color:#fff}
+        a{color:var(--accent);text-decoration:none}
+        img{max-width:100%;height:auto;display:block}
+        ul,ol{list-style:none}
+        /* ----- Container ----- */
+        .container{max-width:1200px;margin:0 auto;padding:0 20px}
+        .section{padding:64px 20px}
+        /* ----- Section Title / Subtitle ----- */
+        .section-title{font-size:2.5rem;font-weight:700;text-align:center;margin-bottom:16px}
+        .section-title::after{content:'';display:block;width:60px;height:4px;border-radius:2px;background:linear-gradient(135deg,#6366f1,#4facfe);margin:12px auto 0}
+        .section-subtitle{font-size:1.1rem;color:var(--text-secondary);text-align:center;margin-bottom:48px;max-width:600px;margin-left:auto;margin-right:auto}
+        .gradient-text{background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        /* ----- Buttons ----- */
+        .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 28px;font-family:'Inter',sans-serif;font-size:1rem;font-weight:500;border-radius:12px;cursor:pointer;border:2px solid transparent;text-decoration:none}
+        .btn-primary{background:var(--accent-gradient);color:#fff;border-color:transparent}
+        .btn-secondary{background:transparent;color:var(--text-primary);border-color:var(--border)}
+        /* ----- Header ----- */
+        .header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,15,0.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+        .header__inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+        .logo{font-size:1.5rem;font-weight:700;text-decoration:none;color:var(--text-primary)}
+        .nav__list{display:flex;gap:32px}
+        .nav__link{color:var(--text-secondary);font-size:0.95rem;font-weight:500;position:relative}
+        .header__actions{display:flex;align-items:center;gap:8px}
+        .theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;font-size:1.25rem;background:var(--bg-card);border:1px solid var(--border);border-radius:50%;cursor:pointer;padding:0}
+        /* ----- Hero ----- */
+        .hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding-top:80px;overflow:hidden}
+        .hero__inner{position:relative;z-index:1}
+        .hero__greeting{font-size:1.25rem;color:var(--text-secondary);margin-bottom:12px}
+        .hero__name{font-weight:700;color:var(--text-primary)}
+        .hero__title{font-size:clamp(2.5rem,6vw,4rem);font-weight:800;margin-bottom:20px;line-height:1.15;letter-spacing:-0.5px}
+        .hero__subtitle{font-size:1.15rem;color:var(--text-secondary);margin-bottom:40px;max-width:600px;margin-left:auto;margin-right:auto;line-height:1.7}
+        .hero__actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+        /* ----- Scroll Animations ----- */
+        .animate-on-scroll{opacity:0;will-change:transform,opacity}
+        .animate-on-scroll:not([data-animation]){transform:translateY(30px)}
+        .animate-on-scroll.visible{opacity:1!important;transform:translateY(0)translateX(0)scale(1)!important}
+        /* ----- Nav Toggle (скрыт на десктопе) ----- */
+        .nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+        .nav-toggle span{display:block;width:24px;height:2px;background:var(--text-primary);border-radius:2px}
+    </style>
+
+    <!-- Main Styles (асинхронно — не блокирует рендеринг) -->
+    <link rel="stylesheet" href="css/style.css" media="print" onload="this.media='all';this.onload=null">
+    <noscript><link rel="stylesheet" href="css/style.css"></noscript>
+
+    <!-- Favicon (emoji fallback) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
+
+    <title>Портфолио Unity-разработчика</title>
+</head>
+<body>
+
+    <!-- Header / Навигация -->
+    <header class="header" id="header">
+        <div class="container header__inner">
+            <a href="#" class="logo gradient-text">d3veloperg</a>
+            <nav class="nav" id="nav">
+                <ul class="nav__list">
+                    <li><a href="#hero" class="nav__link">Главная</a></li>
+                    <li><a href="#about" class="nav__link">Обо мне</a></li>
+                    <li><a href="#skills" class="nav__link">Навыки</a></li>
+                    <li><a href="#projects" class="nav__link">Проекты</a></li>
+                    <li><a href="#code" class="nav__link">Код</a></li>
+                    <li><a href="#experience" class="nav__link">Опыт</a></li>
+                    <li><a href="#contact" class="nav__link">Контакты</a></li>
+                </ul>
+            </nav>
+            <div class="header__actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">☀️</button>
+                <button class="nav-toggle" id="navToggle" aria-label="Меню">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- ============================================ -->
+        <!-- Hero Section                                 -->
+        <!-- ============================================ -->
+        <section id="hero" class="section hero">
+            <!-- Фоновый эффект (сетка) через CSS ::before -->
+            <div class="container hero__inner">
+                <p class="hero__greeting animate-on-scroll">
+                    Привет, я <span class="hero__name">Семён</span>
+                </p>
+                <h1 class="hero__title gradient-text animate-on-scroll">
+                    Unity-разработчик
+                </h1>
+                <p class="hero__subtitle animate-on-scroll">
+                    Пишу чистый C# код. Создаю архитектуру игр и приложений на Unity.
+                </p>
+                <div class="hero__actions animate-on-scroll">
+                    <a href="#projects" class="btn btn-primary">Смотреть проекты</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- About Section                                -->
+        <!-- ============================================ -->
+        <section id="about" class="section about">
+            <div class="container">
+                <h2 class="section-title animate-on-scroll">Обо мне</h2>
+                <p class="section-subtitle animate-on-scroll">Кто я и чем занимаюсь</p>
+                <div class="about__content">
+                    <div class="about__grid">
+                        <!-- Левая колонка: фото -->
+                        <div class="about__photo-wrapper animate-on-scroll">
+                            <img src="assets/images/MyPhoto.jpg" alt="Семён Малышев" class="about__photo" width="600" height="713" fetchpriority="high">
+                        </div>
+
+                        <!-- Правая колонка: текст + статистика -->
+                        <div class="about__info animate-on-scroll">
+                            <p class="about__text">
+                                Я Unity-разработчик с фокусом на программирование и архитектуру кода. Специализируюсь на C#, проектировании систем, оптимизации и написании чистого, поддерживаемого кода. Работаю над играми и интерактивными приложениями, где основная ценность — качественный код и продуманная архитектура.
+                            </p>
+
+                            <!-- Блок с ключевыми цифрами -->
+                            <div class="about__stats">
+                                <div class="stat-card">
+                                    <span class="stat-card__number gradient-text">2+</span>
+                                    <span class="stat-card__label">Года коммерческой разработки</span>
+                                </div>
+                                <div class="stat-card">
+                                    <span class="stat-card__number gradient-text">20+</span>
+                                    <span class="stat-card__label">Опубликованных проектов</span>
+                                </div>
+                                <div class="stat-card">
+                                    <span class="stat-card__number gradient-text">🎓</span>
+                                    <span class="stat-card__label">Имеется опыт преподавания</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- Skills Section                               -->
+        <!-- ============================================ -->
+        <section id="skills" class="section skills">
+            <div class="container">
+                <h2 class="section-title animate-on-scroll">Навыки</h2>
+                <p class="section-subtitle animate-on-scroll">Технологии и инструменты, с которыми я работаю</p>
+                <div class="skills__grid">
+
+                    <!-- Unity & C# -->
+                    <div class="skill-category animate-on-scroll">
+                        <div class="skill-category__header">
+                            <span class="skill-category__icon">🎮</span>
+                            <h3 class="skill-category__title">Unity & C#</h3>
+                        </div>
+                        <div class="skill-category__tags">
+                            <span class="skill-tag">C# (LINQ, async/await, DI)</span>
+                            <span class="skill-tag">Unity Engine (2020.3+)</span>
+                            <span class="skill-tag">Unity UI / uGUI</span>
+                            <span class="skill-tag">Addressables / Asset Bundles</span>
+                            <span class="skill-tag">DOTween / PrimeTween</span>
+                            <span class="skill-tag">ECS (Entities)</span>
+                            <span class="skill-tag">WebGL-сборки</span>
+                        </div>
+                    </div>
+
+                    <!-- Web -->
+                    <div class="skill-category animate-on-scroll">
+                        <div class="skill-category__header">
+                            <span class="skill-category__icon">🌐</span>
+                            <h3 class="skill-category__title">Web</h3>
+                        </div>
+                        <div class="skill-category__tags">
+                            <span class="skill-tag">JavaScript (базовый)</span>
+                            <span class="skill-tag">HTML5 / CSS3</span>
+                            <span class="skill-tag">REST API</span>
+                            <span class="skill-tag">WebSocket</span>
+                        </div>
+                    </div>
+
+                    <!-- Инструменты -->
+                    <div class="skill-category animate-on-scroll">
+                        <div class="skill-category__header">
+                            <span class="skill-category__icon">🛠</span>
+                            <h3 class="skill-category__title">Инструменты</h3>
+                        </div>
+                        <div class="skill-category__tags">
+                            <span class="skill-tag">Git / GitHub / Git Flow</span>
+                            <span class="skill-tag">Rider / VS Code</span>
+                            <span class="skill-tag">Jira / Trello / YouTrack</span>
+                            <span class="skill-tag">CI/CD (Github Actions)</span>
+                        </div>
+                    </div>
+
+                    <!-- SDK & Платформы -->
+                    <div class="skill-category animate-on-scroll">
+                        <div class="skill-category__header">
+                            <span class="skill-category__icon">📦</span>
+                            <h3 class="skill-category__title">SDK & Платформы</h3>
+                        </div>
+                        <div class="skill-category__tags">
+                            <span class="skill-tag">YandexSDK (Yandex Games)</span>
+                            <span class="skill-tag">MirraSDK</span>
+                            <span class="skill-tag">Playgamma SDK</span>
+                            <span class="skill-tag">WebGL / Mobile / PC</span>
+                        </div>
+                    </div>
+
+                    <!-- Дизайн -->
+                    <div class="skill-category animate-on-scroll">
+                        <div class="skill-category__header">
+                            <span class="skill-category__icon">🎨</span>
+                            <h3 class="skill-category__title">Дизайн</h3>
+                        </div>
+                        <div class="skill-category__tags">
+                            <span class="skill-tag">Figma (базовый)</span>
+                            <span class="skill-tag">Photoshop</span>
+                            <span class="skill-tag">Blender</span>
+                            <span class="skill-tag">Aseprite</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- Projects Section                             -->
+        <!-- ============================================ -->
+        <section id="projects" class="section projects">
+            <div class="container">
+                <h2 class="section-title animate-on-scroll">Проекты</h2>
+                <p class="section-subtitle animate-on-scroll">Проекты, в которых я принимал участие</p>
+
+                <div class="projects__grid">
+
+                    <!-- 1. Очень странная удача -->
+                    <div class="project-card animate-on-scroll">
+                        <div class="project-card__placeholder">
+                            <span class="project-card__placeholder-icon">🎮</span>
+                        </div>
+                        <div class="project-card__body">
+                            <div class="project-card__tags">
+                                <span class="project-card__tag project-card__tag--platform">Web</span>
+                            </div>
+                            <h3 class="project-card__title">«Очень странная удача»</h3>
+                            <p class="project-card__description">
+                                Интерактивная игра. Реализована на Unity с интеграцией YandexSDK.
+                            </p>
+                            <div class="project-card__stack">
+                                <span class="project-card__stack-tag">Unity</span>
+                                <span class="project-card__stack-tag">YandexSDK</span>
+                                <span class="project-card__stack-tag">WebGL</span>
+                            </div>
+                            <a href="https://myindie.ru" target="_blank" class="project-card__link btn btn-primary">Смотреть проект</a>
+                        </div>
+                    </div>
+
+                    <!-- 2. QR-Games -->
+                    <div class="project-card animate-on-scroll">
+                        <div class="project-card__placeholder">
+                            <span class="project-card__placeholder-icon">🎲</span>
+                        </div>
+                        <div class="project-card__body">
+                            <div class="project-card__tags">
+                                <span class="project-card__tag project-card__tag--platform">Web, Mobile</span>
+                            </div>
+                            <h3 class="project-card__title">QR-Games</h3>
+                            <p class="project-card__description">
+                                Пати-игры для компании. Реализация мультиплеера.
+                            </p>
+                            <div class="project-card__stack">
+                                <span class="project-card__stack-tag">Unity</span>
+                            </div>
+                            <a href="https://qr-games.ru" target="_blank" class="project-card__link btn btn-primary">Смотреть проект</a>
+                        </div>
+                    </div>
+
+                    <!-- 3. MapPinner -->
+                    <div class="project-card animate-on-scroll">
+                        <div class="project-card__placeholder">
+                            <span class="project-card__placeholder-icon">🗺️</span>
+                        </div>
+                        <div class="project-card__body">
+                            <div class="project-card__tags">
+                                <span class="project-card__tag project-card__tag--platform">Web</span>
+                            </div>
+                            <h3 class="project-card__title">MapPinner</h3>
+                            <p class="project-card__description">
+                                Веб-приложение для создания заметок на карте. Совместное редактирование в реальном времени.
+                            </p>
+                            <div class="project-card__stack">
+                                <span class="project-card__stack-tag">JavaScript</span>
+                                <span class="project-card__stack-tag">Firebase</span>
+                            </div>
+                            <a href="https://github.com/SemenMalyshev/MapPinner" target="_blank" class="project-card__link btn btn-primary">Исходный код</a>
+                        </div>
+                    </div>
+
+                    <!-- 4. Проекты для Яндекс Игр -->
+                    <div class="project-card animate-on-scroll">
+                        <div class="project-card__placeholder">
+                            <span class="project-card__placeholder-icon">🏆</span>
+                        </div>
+                        <div class="project-card__body">
+                            <div class="project-card__tags">
+                                <span class="project-card__tag project-card__tag--platform">Web (Яндекс Игры)</span>
+                            </div>
+                            <h3 class="project-card__title">Проекты для Яндекс Игр</h3>
+                            <p class="project-card__description">
+                                Опыт работы с платформой Яндекс Игр, 5+ опубликованных проектов на Unity.
+                            </p>
+                            <div class="project-card__stack">
+                                <span class="project-card__stack-tag">Unity</span>
+                                <span class="project-card__stack-tag">YandexSDK</span>
+                                <span class="project-card__stack-tag">WebGL</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. Преподавание в Академии TOP -->
+                    <div class="project-card animate-on-scroll">
+                        <div class="project-card__placeholder">
+                            <span class="project-card__placeholder-icon">📚</span>
+                        </div>
+                        <div class="project-card__body">
+                            <div class="project-card__tags">
+                                <span class="project-card__tag project-card__tag--platform">Офлайн</span>
+                            </div>
+                            <h3 class="project-card__title">Преподавание в Академии TOP</h3>
+                            <p class="project-card__description">
+                                Преподаю в «Академия TOP»: Unity и C#, а также Blender, SketchUp, Tinkercad, Python и другие IT-дисциплины.
+                            </p>
+                            <div class="project-card__stack">
+                                <span class="project-card__stack-tag">C#</span>
+                                <span class="project-card__stack-tag">Unity</span>
+                                <span class="project-card__stack-tag">Методические материалы</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- Video Section (Gameplay)                     -->
+        <!-- ============================================ -->
+        <section id="video" class="section video">
+            <div class="container">
+                <h2 class="section-title animate-on-scroll">Видео с геймплеем</h2>
+                <p class="section-subtitle animate-on-scroll">Короткие демонстрации моих игровых проектов</p>
+                <div class="video__grid">
+
+                    <!-- Видео 1: Toy Air Dogs (Rutube) -->
+                    <div class="video__card animate-on-scroll">
+                        <h3 class="video__title">Toy Air Dogs</h3>
+                        <div class="video__embed">
+                            <iframe width="720" height="405" loading="lazy"
+                                src="https://rutube.ru/play/embed/be09c12149055dc80383557c0fa18442"
+                                frameborder="0"
+                                webkitAllowFullScreen
+                                mozallowfullscreen
+                                allowfullscreen
+                                allow="encrypted-media">
+                            </iframe>
+                        </div>
+                    </div>
+
+                    <!-- Видео 2: QR-Clover (JAM / MyIndie January Rush Lvl 8) (Rutube) -->
+                    <div class="video__card animate-on-scroll">
+                        <h3 class="video__title">QR-Clover (MyIndie January Rush Lvl 8)</h3>
+                        <div class="video__embed">
+                            <iframe width="720" height="405" loading="lazy"
+                                src="https://rutube.ru/play/embed/c13c4e42937b3d029f769a682dfbbf28"
+                                frameborder="0"
+                                webkitAllowFullScreen
+                                mozallowfullscreen
+                                allowfullscreen
+                                allow="encrypted-media">
+                            </iframe>
+                        </div>
+                    </div>
+
+                    <!-- Видео 3: QR-FishArena (Rutube) -->
+                    <div class="video__card animate-on-scroll">
+                        <h3 class="video__title">QR-FishArena</h3>
+                        <div class="video__embed">
+                            <iframe width="720" height="405" loading="lazy"
+                                src="https://rutube.ru/play/embed/f94c72b9a376e66cce2437f94bcac69c"
+                                frameborder="0"
+                                webkitAllowFullScreen
+                                mozallowfullscreen
+                                allowfullscreen
+                                allow="encrypted-media">
+                            </iframe>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- Code & Architecture Section                  -->
+        <!-- ============================================ -->
+        <section id="code" class="section code">
+            <div class="container">
+                <h2 class="section-title animate-on-scroll">Архитектура кода и примеры</h2>
+                <p class="section-subtitle animate-on-scroll">Реальные примеры кода из проекта MapPinner. Кликните по блоку, чтобы открыть соответствующий код.</p>
+
+                <!-- Архитектурная диаграмма MapPinner (НАВИГАЦИЯ) -->
+                <div class="code__diagram animate-on-scroll">
+                    <div class="arch-diagram">
+                        <!-- Bootstrap Layer -->
+                        <div class="arch-layer arch-layer--bootstrap">
+                            <div class="arch-layer__label">Bootstrap</div>
+                            <div class="arch-layer__items">
+                                <div class="arch-item arch-item--clickable" data-tab="code-GameInstaller">GameInstaller</div>
+                            </div>
+                        </div>
+
+                        <!-- Application Layer -->
+                        <div class="arch-layer arch-layer--application">
+                            <div class="arch-layer__label">Application</div>
+                            <div class="arch-layer__items">
+                                <div class="arch-item arch-item--clickable" data-tab="code-PinInteractionSystem">PinInteractionSystem</div>
+                                <div class="arch-item arch-item--clickable" data-tab="code-PinCreationService">PinCreationService</div>
+                                <div class="arch-item arch-item--clickable" data-tab="code-PinSelectionService">PinSelectionService</div>
+                                <div class="arch-item arch-item--clickable" data-tab="code-MapPersistenceService">MapPersistenceService</div>
+                                <div class="arch-item arch-item--clickable" data-tab="code-CameraNavigationSystem">CameraNavigationSystem</div>
+                            </div>
+                        </div>
+
+                        <!-- Domain Layer -->
+                        <div class="arch-layer arch-layer--domain">
+                            <div class="arch-layer__label">Domain</div>
+                            <div class="arch-layer__items">
+                                <div class="arch-item arch-item--clickable" data-tab="code-PinEntity">PinEntity</div>
+                                <div class="arch-item arch-item--clickable" data-tab="code-PinId">PinId</div>
+                                <div class="arch-item arch-item--clickable" data-tab="code-MapState">MapState</div>
+                                <div class="arch-item arch-item--clickable" data-tab="code-MapData">MapData</div>
+                                <div class="arch-item arch-item--clickable" data-tab="code-MapId">MapId</div>
+                            </div>
+                        </div>
+
+                        <!-- Infrastructure Layer -->
+                        <div class="arch-layer arch-layer--infrastructure">
+                            <div class="arch-layer__label">Infrastructure</div>
+                            <div class="arch-layer__items">
+                                <div class="arch-item arch-item--clickable" data-tab="code-IMapRepository">IMapRepository</div>
+                                <div class="arch-item arch-item--clickable" data-tab="code-JsonMapRepository">JsonMapRepository</div>
+                            </div>
+                        </div>
+
+                        <!-- Presentation Layer -->
+                        <div class="arch-layer arch-layer--presentation">
+                            <div class="arch-layer__label">Presentation</div>
+                            <div class="arch-layer__items">
+                                <div class="arch-item arch-item--clickable" data-tab="code-MapView">MapView</div>
+                                <div class="arch-item arch-item--clickable" data-tab="code-MapCameraView">MapCameraView</div>
+                                <div class="arch-item arch-item--clickable" data-tab="code-PinView">PinView</div>
+                                <div class="arch-item arch-item--clickable" data-tab="code-PinViewFactory">PinViewFactory</div>
+                                <div class="arch-item arch-item--clickable" data-tab="code-PinDetailPanel">PinDetailPanel</div>
+                                <div class="arch-item arch-item--clickable" data-tab="code-PinPreviewPanel">PinPreviewPanel</div>
+                                <div class="arch-item arch-item--clickable" data-tab="code-PinEditPanel">PinEditPanel</div>
+                            </div>
+                        </div>
+
+                        <!-- Input Layer -->
+                        <div class="arch-layer arch-layer--input">
+                            <div class="arch-layer__label">Input</div>
+                            <div class="arch-layer__items">
+                                <div class="arch-item arch-item--clickable" data-tab="code-IMouseInput">IMouseInput</div>
+                                <div class="arch-item arch-item--clickable" data-tab="code-UnityMouseInput">UnityMouseInput</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Кодовое поле -->
+                <div class="code__examples" style="margin-top:2rem">
+                    <!-- GameInstaller (Bootstrap) -->
+                    <div class="code__panel active" id="code-GameInstaller">
+                        <div class="code__panel-header">GameInstaller.cs</div>
+                        <pre><code class="language-csharp">using Application;
+using Domain;
+using Infrastructure;
+using Input;
+using Presentation;
+using UnityEngine;
+
+namespace Bootstrap
+{
+    // Composition Root — сборка зависимостей проекта
+    public class GameInstaller : MonoBehaviour
+    {
+        [Header("Scene References")]
+        [SerializeField] private MapCameraView _cameraView;
+        [SerializeField] private MapView _mapView;
+        [SerializeField] private Transform _pinsContainer;
+
+        [Header("UI Panels")]
+        [SerializeField] private PinPreviewPanel _previewPanel;
+        [SerializeField] private PinDetailPanel _detailPanel;
+        [SerializeField] private PinEditPanel _editPanel;
+
+        [Header("Prefabs")]
+        [SerializeField] private PinView _pinPrefab;
+
+        private MapState _mapState;
+        private CameraNavigationSystem _cameraNavSystem;
+        private PinInteractionSystem _pinInteractionSystem;
+        private MapPersistenceService _persistenceService;
+        private PinCreationService _pinCreationService;
+        private PinViewFactory _pinViewFactory;
+
+        void Start()
+        {
+            var mouseInput = new UnityMouseInput();
+            var mapRepository = new JsonMapRepository();
+            var selectionService = new PinSelectionService();
+
+            _persistenceService = new MapPersistenceService(mapRepository);
+            _pinCreationService = new PinCreationService();
+            _cameraNavSystem = new CameraNavigationSystem(
+                mouseInput, _cameraView, _mapView);
+            _pinInteractionSystem = new PinInteractionSystem(
+                mouseInput, selectionService, _cameraView);
+            _pinViewFactory = new PinViewFactory(_pinPrefab, _pinsContainer);
+
+            _mapState = _persistenceService.Load(new MapId("default"));
+            foreach (var pin in _mapState.Pins)
+                CreatePinView(pin);
+        }
+
+        void Update()
+        {
+            _cameraNavSystem.Tick();
+            _pinInteractionSystem.Tick(_mapState);
+        }
+
+        void OnApplicationQuit()
+        {
+            _persistenceService.Save(_mapState);
+        }
+    }
+}</code></pre>
+                    </div>
+
+                    <!-- PinInteractionSystem (Application) -->
+                    <div class="code__panel" id="code-PinInteractionSystem">
+                        <div class="code__panel-header">PinInteractionSystem.cs</div>
+                        <pre><code class="language-csharp">using Domain;
+using Input;
+using Presentation;
+using UnityEngine;
+
+namespace Application
+{
+    // Use Case — обрабатывает взаимодействие пользователя с пинами
+    public class PinInteractionSystem
+    {
+        private enum State { Idle, Pressed, Dragging }
+        private State _currentState = State.Idle;
+
+        private readonly IMouseInput _input;
+        private readonly PinSelectionService _selectionService;
+        private readonly MapCameraView _cameraView;
+
+        private Vector2 _pressStartPosition;
+        private float _pressTime;
+        private PinEntity _pressedPin;
+
+        public System.Action<Vector2> OnEmptySpaceClick;
+        public System.Action<PinEntity> OnPinSelected;
+        public System.Action<PinEntity> OnPinDragStart;
+        public System.Action<PinEntity, Vector2> OnPinDragEnd;
+
+        public void Tick(MapState mapState)
+        {
+            var mousePos = _input.GetMousePosition();
+            var pinUnderMouse = _selectionService.FindPinAtScreenPosition(
+                new Vector2(mousePos.x, mousePos.y),
+                mapState.Pins,
+                wp => _cameraView.WorldToScreen(wp),
+                HitTolerance
+            );
+
+            switch (_currentState)
+            {
+                case State.Idle:
+                    if (_input.GetLeftMouseButtonDown())
+                    {
+                        _currentState = State.Pressed;
+                        _pressedPin = pinUnderMouse;
+                        _pressStartPosition = _input.GetMousePosition();
+                    }
+                    break;
+
+                case State.Pressed:
+                    _pressTime += Time.deltaTime;
+                    if (!_input.IsLeftMouseButtonPressed())
+                    {
+                        float moved = Vector2.Distance(
+                            _pressStartPosition, _input.GetMousePosition());
+                        if (moved < ClickMaxDistance)
+                        {
+                            if (_pressedPin != null)
+                                OnPinSelected?.Invoke(_pressedPin);
+                            else
+                                OnEmptySpaceClick?.Invoke(
+                                    _cameraView.ScreenToWorld(mousePos));
+                        }
+                        _currentState = State.Idle;
+                    }
+                    else if (_pressTime > HoldThreshold && _pressedPin != null)
+                    {
+                        _currentState = State.Dragging;
+                        OnPinDragStart?.Invoke(_pressedPin);
+                    }
+                    break;
+
+                case State.Dragging:
+                    if (_input.GetLeftMouseButtonUp())
+                    {
+                        var worldPos = _cameraView.ScreenToWorld(mousePos);
+                        OnPinDragEnd?.Invoke(_pressedPin, worldPos);
+                        _currentState = State.Idle;
+                    }
+                    break;
+            }
+        }
+    }
+}</code></pre>
+                    </div>
+
+                    <!-- PinCreationService (Application) -->
+                    <div class="code__panel" id="code-PinCreationService">
+                        <div class="code__panel-header">PinCreationService.cs</div>
+                        <pre><code class="language-csharp">using Domain;
+using UnityEngine;
+
+namespace Application
+{
+    // Сервис создания новых пинов
+    public class PinCreationService
+    {
+        public PinEntity CreatePin(Vector2 worldPosition, string title = "")
+        {
+            var pin = new PinEntity(
+                PinId.NewId(),
+                worldPosition,
+                title: string.IsNullOrEmpty(title) ? "Новая заметка" : title
+            );
+            return pin;
+        }
+
+        public PinEntity CreatePinFromClipboard(Vector2 worldPosition)
+        {
+            var imagePath = TrySaveClipboardImage();
+            var pin = new PinEntity(
+                PinId.NewId(),
+                worldPosition,
+                title: "Из буфера обмена",
+                imagePath: imagePath
+            );
+            return pin;
+        }
+
+        private string TrySaveClipboardImage()
+        {
+            // Сохранение изображения из буфера обмена
+            return string.Empty;
+        }
+    }
+}</code></pre>
+                    </div>
+
+                    <!-- PinSelectionService (Application) -->
+                    <div class="code__panel" id="code-PinSelectionService">
+                        <div class="code__panel-header">PinSelectionService.cs</div>
+                        <pre><code class="language-csharp">using System.Collections.Generic;
+using System.Linq;
+using Domain;
+using UnityEngine;
+
+namespace Application
+{
+    // Сервис определения пина под курсором
+    public class PinSelectionService
+    {
+        private const float DEFAULTHITRADIUS = 30f;
+
+        public PinEntity FindPinAtScreenPosition(
+            Vector2 screenPos,
+            IEnumerable<PinEntity> pins,
+            System.Func<Vector2, Vector2> worldToScreen,
+            float hitRadius = DEFAULTHITRADIUS)
+        {
+            return pins
+                .Select(pin => new {
+                    Pin = pin,
+                    ScreenPos = worldToScreen(pin.Position),
+                    Distance = Vector2.Distance(screenPos, worldToScreen(pin.Position))
+                })
+                .Where(x => x.Distance < hitRadius)
+                .OrderBy(x => x.Distance)
+                .Select(x => x.Pin)
+                .FirstOrDefault();
+        }
+    }
+}</code></pre>
+                    </div>
+
+                    <!-- MapPersistenceService (Application) -->
+                    <div class="code__panel" id="code-MapPersistenceService">
+                        <div class="code__panel-header">MapPersistenceService.cs</div>
+                        <pre><code class="language-csharp">using Domain;
+using Infrastructure;
+
+namespace Application
+{
+    // Сервис сохранения и загрузки карты
+    public class MapPersistenceService
+    {
+        private readonly IMapRepository _repository;
+
+        public MapPersistenceService(IMapRepository repository)
+        {
+            _repository = repository;
+        }
+
+        public MapState Load(MapId mapId)
+        {
+            var data = _repository.Load(mapId.Value);
+            return new MapState(data);
+        }
+
+        public void Save(MapState mapState)
+        {
+            var data = mapState.ToData();
+            _repository.Save(data);
+        }
+
+        public bool HasSave(MapId mapId)
+        {
+            return _repository.Load(mapId.Value) != null;
+        }
+    }
+}</code></pre>
+                    </div>
+
+                    <!-- CameraNavigationSystem (Application) -->
+                    <div class="code__panel" id="code-CameraNavigationSystem">
+                        <div class="code__panel-header">CameraNavigationSystem.cs</div>
+                        <pre><code class="language-csharp">using Input;
+using Presentation;
+using UnityEngine;
+
+namespace Application
+{
+    // Система управления камерой: панорама, зум
+    public class CameraNavigationSystem
+    {
+        private readonly IMouseInput _input;
+        private readonly MapCameraView _cameraView;
+        private readonly MapView _mapView;
+
+        private Vector2 _lastMousePos;
+        private bool _isDragging;
+
+        private const float ZOOMSPEED = 0.1f;
+        private const float DRAGSPEED = 1f;
+        private const float MINZOOM = 0.5f;
+        private const float MAXZOOM = 5f;
+
+        public CameraNavigationSystem(
+            IMouseInput input,
+            MapCameraView cameraView,
+            MapView mapView)
+        {
+            _input = input;
+            _cameraView = cameraView;
+            _mapView = mapView;
+        }
+
+        public void Tick()
+        {
+            HandleZoom();
+            HandlePan();
+        }
+
+        private void HandleZoom()
+        {
+            float scroll = _input.GetMouseScrollDelta();
+            if (Mathf.Abs(scroll) > 0.01f)
+            {
+                float newZoom = _cameraView.Zoom - scroll * ZOOMSPEED;
+                newZoom = Mathf.Clamp(newZoom, MINZOOM, MAXZOOM);
+                _cameraView.SetZoom(newZoom);
+            }
+        }
+
+        private void HandlePan()
+        {
+            if (_input.GetMouseButtonDown(2) || _input.GetMouseButtonDown(1))
+            {
+                _isDragging = true;
+                _lastMousePos = _input.GetMousePosition();
+            }
+
+            if (_input.GetMouseButtonUp(2) || _input.GetMouseButtonUp(1))
+                _isDragging = false;
+
+            if (_isDragging)
+            {
+                Vector2 delta = _input.GetMousePosition() - _lastMousePos;
+                _cameraView.Move(delta * DRAGSPEED * -1f);
+                _lastMousePos = _input.GetMousePosition();
+            }
+        }
+    }
+}</code></pre>
+                    </div>
+
+                    <!-- PinEntity (Domain) -->
+                    <div class="code__panel" id="code-PinEntity">
+                        <div class="code__panel-header">PinEntity.cs</div>
+                        <pre><code class="language-csharp">using System;
+using UnityEngine;
+
+namespace Domain
+{
+    // Entity — основная доменная сущность
+    public class PinEntity
+    {
+        public PinId Id { get; }
+        public Vector2 Position { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string ImagePath { get; set; }
+        public string AudioPath { get; set; }
+
+        public PinEntity(PinId id, Vector2 position,
+            string title = "", string description = "",
+            string imagePath = "", string audioPath = "")
+        {
+            Id = id;
+            Position = position;
+            Title = title;
+            Description = description;
+            ImagePath = imagePath;
+            AudioPath = audioPath;
+        }
+    }
+}</code></pre>
+                    </div>
+
+                    <!-- PinId (Domain) -->
+                    <div class="code__panel" id="code-PinId">
+                        <div class="code__panel-header">PinId.cs</div>
+                        <pre><code class="language-csharp">using System;
+
+namespace Domain
+{
+    // Value Object — неизменяемый идентификатор пина
+    public readonly struct PinId : IEquatable<PinId>
+    {
+        public Guid Value { get; }
+
+        public PinId(Guid value) => Value = value;
+
+        public static PinId NewId() => new(Guid.NewGuid());
+
+        public bool Equals(PinId other) => Value.Equals(other.Value);
+        public override bool Equals(object obj) => obj is PinId other && Equals(other);
+        public override int GetHashCode() => Value.GetHashCode();
+        public override string ToString() => Value.ToString();
+    }
+}</code></pre>
+                    </div>
+
+                    <!-- MapState (Domain) -->
+                    <div class="code__panel" id="code-MapState">
+                        <div class="code__panel-header">MapState.cs</div>
+                        <pre><code class="language-csharp">using System.Collections.Generic;
+
+namespace Domain
+{
+    // Aggregate — управляет состоянием карты и пинов
+    public class MapState
+    {
+        private readonly Dictionary<PinId, PinEntity> _pins = new();
+        public readonly MapId MapId;
+        public IEnumerable<PinEntity> Pins => _pins.Values;
+
+        public MapState(MapData data)
+        {
+            MapId = data.MapId;
+            foreach (var pin in data.Pins)
+                _pins[pin.Id] = pin;
+        }
+
+        public void AddPin(PinEntity pin) => _pins[pin.Id] = pin;
+
+        public PinEntity GetPin(PinId id) =>
+            _pins.TryGetValue(id, out var pin) ? pin : null;
+
+        public void RemovePin(PinId id) => _pins.Remove(id);
+
+        public MapData ToData()
+        {
+            return new MapData
+            {
+                MapId = this.MapId,
+                Pins = new List<PinEntity>(_pins.Values)
+            };
+        }
+    }
+}</code></pre>
+                    </div>
+
+                    <!-- MapData (Domain) -->
+                    <div class="code__panel" id="code-MapData">
+                        <div class="code__panel-header">MapData.cs</div>
+                        <pre><code class="language-csharp">using System.Collections.Generic;
+using System;
+
+namespace Domain
+{
+    // DTO — данные карты для сериализации
+    [Serializable]
+    public class MapData
+    {
+        public MapId MapId;
+        public List<PinEntity> Pins = new();
+
+        public MapData() { }
+
+        public MapData(MapId mapId, List<PinEntity> pins)
+        {
+            MapId = mapId;
+            Pins = pins;
+        }
+    }
+}</code></pre>
+                    </div>
+
+                    <!-- MapId (Domain) -->
+                    <div class="code__panel" id="code-MapId">
+                        <div class="code__panel-header">MapId.cs</div>
+                        <pre><code class="language-csharp">using System;
+
+namespace Domain
+{
+    // Value Object — идентификатор карты
+    public readonly struct MapId : IEquatable<MapId>
+    {
+        public string Value { get; }
+
+        public MapId(string value) => Value = value;
+
+        public bool Equals(MapId other) => Value == other.Value;
+        public override bool Equals(object obj) => obj is MapId other && Equals(other);
+        public override int GetHashCode() => Value?.GetHashCode() ?? 0;
+        public override string ToString() => Value ?? "unknown";
+    }
+}</code></pre>
+                    </div>
+
+                    <!-- IMapRepository (Infrastructure) -->
+                    <div class="code__panel" id="code-IMapRepository">
+                        <div class="code__panel-header">IMapRepository.cs</div>
+                        <pre><code class="language-csharp">namespace Infrastructure
+{
+    // Репозиторий — паттерн для доступа к данным
+    public interface IMapRepository
+    {
+        MapData Load(string mapId);
+        void Save(MapData data);
+    }
+}</code></pre>
+                    </div>
+
+                    <!-- JsonMapRepository (Infrastructure) -->
+                    <div class="code__panel" id="code-JsonMapRepository">
+                        <div class="code__panel-header">JsonMapRepository.cs</div>
+                        <pre><code class="language-csharp">using System.IO;
+using UnityEngine;
+
+namespace Infrastructure
+{
+    // Реализация репозитория через JSON-файлы
+    public class JsonMapRepository : IMapRepository
+    {
+        private readonly string _savePath;
+
+        public JsonMapRepository()
+        {
+            _savePath = Application.persistentDataPath;
+        }
+
+        public MapData Load(string mapId)
+        {
+            var path = Path.Combine(_savePath, $"{mapId}.json");
+            if (!File.Exists(path))
+            {
+                Debug.Log($"[JsonMapRepository] No save found: {path}");
+                return new MapData();
+            }
+            var json = File.ReadAllText(path);
+            return JsonUtility.FromJson<MapData>(json);
+        }
+
+        public void Save(MapData data)
+        {
+            var path = Path.Combine(_savePath, $"{data.MapId}.json");
+            var json = JsonUtility.ToJson(data, prettyPrint: true);
+            File.WriteAllText(path, json);
+            Debug.Log($"[JsonMapRepository] Saved map: {data.MapId}");
+        }
+    }
+}</code></pre>
+                    </div>
+
+                    <!-- MapView (Presentation) -->
+                    <div class="code__panel" id="code-MapView">
+                        <div class="code__panel-header">MapView.cs</div>
+                        <pre><code class="language-csharp">using UnityEngine;
+
+namespace Presentation
+{
+    // Основной View карты
+    public class MapView : MonoBehaviour
+    {
+        [SerializeField] private RectTransform _mapContainer;
+
+        public Vector2 GetMapSize()
+        {
+            return _mapContainer.rect.size;
+        }
+
+        public Vector2 ScreenToMapPosition(Vector2 screenPos)
+        {
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                _mapContainer, screenPos, null, out var localPoint);
+            return localPoint;
+        }
+    }
+}</code></pre>
+                    </div>
+
+                    <!-- MapCameraView (Presentation) -->
+                    <div class="code__panel" id="code-MapCameraView">
+                        <div class="code__panel-header">MapCameraView.cs</div>
+                        <pre><code class="language-csharp">using UnityEngine;
+
+namespace Presentation
+{
+    // View камеры — управление положением и зумом
+    public class MapCameraView : MonoBehaviour
+    {
+        [SerializeField] private new Camera camera;
+        [SerializeField] private float defaultZoom = 3f;
+
+        public float Zoom { get; private set; }
+
+        private Vector3 _targetPosition;
+        private float _targetZoom;
+
+        void Start()
+        {
+            Zoom = defaultZoom;
+            _targetZoom = defaultZoom;
+            _targetPosition = transform.position;
+        }
+
+        public void Move(Vector2 delta)
+        {
+            _targetPosition += new Vector3(delta.x, delta.y, 0);
+        }
+
+        public void SetZoom(float zoom)
+        {
+            _targetZoom = zoom;
+        }
+
+        public Vector2 WorldToScreen(Vector2 worldPos)
+        {
+            return camera.WorldToScreenPoint(
+                new Vector3(worldPos.x, worldPos.y, 0));
+        }
+
+        public Vector2 ScreenToWorld(Vector2 screenPos)
+        {
+            var world = camera.ScreenToWorldPoint(
+                new Vector3(screenPos.x, screenPos.y, 0));
+            return new Vector2(world.x, world.y);
+        }
+
+        void LateUpdate()
+        {
+            transform.position = Vector3.Lerp(
+                transform.position, _targetPosition, Time.deltaTime * 10f);
+            Zoom = Mathf.Lerp(Zoom, _targetZoom, Time.deltaTime * 10f);
+            camera.orthographicSize = Zoom;
+        }
+    }
+}</code></pre>
+                    </div>
+
+                    <!-- PinView (Presentation) -->
+                    <div class="code__panel" id="code-PinView">
+                        <div class="code__panel-header">PinView.cs</div>
+                        <pre><code class="language-csharp">using Domain;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace Presentation
+{
+    // View-компонент пина на карте
+    public class PinView : MonoBehaviour
+    {
+        [SerializeField] private Image _icon;
+        [SerializeField] private GameObject _selectionIndicator;
+        [SerializeField] private CanvasGroup _canvasGroup;
+
+        public PinEntity BoundPin { get; private set; }
+
+        public void Bind(PinEntity pin)
+        {
+            BoundPin = pin;
+            UpdatePosition();
+        }
+
+        public void UpdatePosition()
+        {
+            var screenPos = Camera.main.WorldToScreenPoint(
+                new Vector3(BoundPin.Position.x, BoundPin.Position.y, 0));
+            transform.position = screenPos;
+        }
+
+        public void SetSelected(bool selected)
+        {
+            _selectionIndicator.SetActive(selected);
+            _canvasGroup.alpha = selected ? 1f : 0.7f;
+        }
+
+        public void SetHighlight(bool highlight)
+        {
+            transform.localScale = highlight ? Vector3.one * 1.15f : Vector3.one;
+        }
+    }
+}</code></pre>
+                    </div>
+
+                    <!-- PinViewFactory (Presentation) -->
+                    <div class="code__panel" id="code-PinViewFactory">
+                        <div class="code__panel-header">PinViewFactory.cs</div>
+                        <pre><code class="language-csharp">using Domain;
+using UnityEngine;
+
+namespace Presentation
+{
+    // Фабрика для создания View пинов
+    public class PinViewFactory
+    {
+        private readonly PinView _prefab;
+        private readonly Transform _container;
+
+        public PinViewFactory(PinView prefab, Transform container)
+        {
+            _prefab = prefab;
+            _container = container;
+        }
+
+        public PinView Create(PinEntity pin)
+        {
+            var view = Object.Instantiate(_prefab, _container);
+            view.Bind(pin);
+            return view;
+        }
+
+        public void Destroy(PinView view)
+        {
+            Object.Destroy(view.gameObject);
+        }
+    }
+}</code></pre>
+                    </div>
+
+                    <!-- PinDetailPanel (Presentation) -->
+                    <div class="code__panel" id="code-PinDetailPanel">
+                        <div class="code__panel-header">PinDetailPanel.cs</div>
+                        <pre><code class="language-csharp">using Domain;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace Presentation
+{
+    // Панель детального просмотра пина
+    public class PinDetailPanel : MonoBehaviour
+    {
+        [SerializeField] private GameObject _panel;
+        [SerializeField] private Text _titleText;
+        [SerializeField] private Text _descriptionText;
+        [SerializeField] private Image _previewImage;
+
+        private PinEntity _currentPin;
+
+        public void Show(PinEntity pin)
+        {
+            _currentPin = pin;
+            _titleText.text = pin.Title;
+            _descriptionText.text = pin.Description;
+            _panel.SetActive(true);
+        }
+
+        public void Hide()
+        {
+            _panel.SetActive(false);
+            _currentPin = null;
+        }
+    }
+}</code></pre>
+                    </div>
+
+                    <!-- PinPreviewPanel (Presentation) -->
+                    <div class="code__panel" id="code-PinPreviewPanel">
+                        <div class="code__panel-header">PinPreviewPanel.cs</div>
+                        <pre><code class="language-csharp">using Domain;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace Presentation
+{
+    // Панель предпросмотра пина (мини)
+    public class PinPreviewPanel : MonoBehaviour
+    {
+        [SerializeField] private GameObject _panel;
+        [SerializeField] private Text _titleText;
+        [SerializeField] private Image _previewImage;
+        [SerializeField] private float _followOffset = 20f;
+
+        private PinEntity _currentPin;
+
+        public void ShowAt(PinEntity pin, Vector2 screenPos)
+        {
+            _currentPin = pin;
+            _titleText.text = pin.Title;
+            _panel.transform.position = screenPos + Vector2.up * _followOffset;
+            _panel.SetActive(true);
+        }
+
+        public void Hide()
+        {
+            _panel.SetActive(false);
+            _currentPin = null;
+        }
+
+        void Update()
+        {
+            if (_currentPin != null)
+            {
+                var screenPos = Camera.main.WorldToScreenPoint(
+                    new Vector3(_currentPin.Position.x, _currentPin.Position.y, 0));
+                _panel.transform.position = screenPos + Vector3.up * _followOffset;
+            }
+        }
+    }
+}</code></pre>
+                    </div>
+
+                    <!-- PinEditPanel (Presentation) -->
+                    <div class="code__panel" id="code-PinEditPanel">
+                        <div class="code__panel-header">PinEditPanel.cs</div>
+                        <pre><code class="language-csharp">using Domain;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace Presentation
+{
+    // Панель редактирования пина
+    public class PinEditPanel : MonoBehaviour
+    {
+        [SerializeField] private GameObject _panel;
+        [SerializeField] private InputField _titleInput;
+        [SerializeField] private InputField _descriptionInput;
+        [SerializeField] private Button _saveButton;
+        [SerializeField] private Button _deleteButton;
+        [SerializeField] private Button _cancelButton;
+
+        private PinEntity _editingPin;
+
+        public void Open(PinEntity pin)
+        {
+            _editingPin = pin;
+            _titleInput.text = pin.Title;
+            _descriptionInput.text = pin.Description;
+            _panel.SetActive(true);
+        }
+
+        public void Close()
+        {
+            _panel.SetActive(false);
+            _editingPin = null;
+        }
+
+        public void Save()
+        {
+            if (_editingPin == null) return;
+            _editingPin.Title = _titleInput.text;
+            _editingPin.Description = _descriptionInput.text;
+            Close();
+        }
+
+        public void Delete()
+        {
+            if (_editingPin == null) return;
+            // Сигнал для удаления
+            Close();
+        }
+    }
+}</code></pre>
+                    </div>
+
+                    <!-- IMouseInput (Input) -->
+                    <div class="code__panel" id="code-IMouseInput">
+                        <div class="code__panel-header">IMouseInput.cs</div>
+                        <pre><code class="language-csharp">using UnityEngine;
+
+namespace Input
+{
+    // Абстракция ввода — позволяет тестировать без реального мыши
+    public interface IMouseInput
+    {
+        Vector2 GetMousePosition();
+        bool GetLeftMouseButtonDown();
+        bool IsLeftMouseButtonPressed();
+        bool GetLeftMouseButtonUp();
+        bool GetMouseButtonDown(int button);
+        bool GetMouseButtonUp(int button);
+        float GetMouseScrollDelta();
+    }
+}</code></pre>
+                    </div>
+
+                    <!-- UnityMouseInput (Input) -->
+                    <div class="code__panel" id="code-UnityMouseInput">
+                        <div class="code__panel-header">UnityMouseInput.cs</div>
+                        <pre><code class="language-csharp">using UnityEngine;
+
+namespace Input
+{
+    // Реализация через Unity Input System
+    public class UnityMouseInput : IMouseInput
+    {
+        public Vector2 GetMousePosition()
+            => UnityEngine.Input.mousePosition;
+
+        public bool GetLeftMouseButtonDown()
+            => UnityEngine.Input.GetMouseButtonDown(0);
+
+        public bool IsLeftMouseButtonPressed()
+            => UnityEngine.Input.GetMouseButton(0);
+
+        public bool GetLeftMouseButtonUp()
+            => UnityEngine.Input.GetMouseButtonUp(0);
+
+        public bool GetMouseButtonDown(int button)
+            => UnityEngine.Input.GetMouseButtonDown(button);
+
+        public bool GetMouseButtonUp(int button)
+            => UnityEngine.Input.GetMouseButtonUp(button);
+
+        public float GetMouseScrollDelta()
+            => UnityEngine.Input.mouseScrollDelta.y;
+    }
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- Experience Section                           -->
+        <!-- ============================================ -->
+        <section id="experience" class="section experience">
+            <div class="container">
+                <h2 class="section-title animate-on-scroll">Опыт работы</h2>
+                <p class="section-subtitle animate-on-scroll">Места, где я работал и набирался опыта</p>
+                <div class="experience__timeline">
+
+                    <!-- 1. Малые игровые студии -->
+                    <div class="timeline__item animate-on-scroll">
+                        <div class="timeline__marker"></div>
+                        <div class="timeline__card">
+                            <h3 class="timeline__title">Unity-разработчик — Малые игровые студии</h3>
+                            <span class="timeline__period">2022 — 2025</span>
+                            <p class="timeline__description">
+                                Разработка игр на Unity для мобильных платформ, веба и ПК. Оптимизация производительности, работа с Asset Bundles/Addressables, интеграция SDK.
+                            </p>
+                            <div class="timeline__tags">
+                                <span class="skill-tag">Unity</span>
+                                <span class="skill-tag">C#</span>
+                                <span class="skill-tag">WebGL</span>
+                                <span class="skill-tag">SDK</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Яндекс Игры -->
+                    <div class="timeline__item animate-on-scroll">
+                        <div class="timeline__marker"></div>
+                        <div class="timeline__card">
+                            <h3 class="timeline__title">Unity-разработчик — Яндекс Игры (фриланс)</h3>
+                            <span class="timeline__period">2024 — 2025</span>
+                            <p class="timeline__description">
+                                Веб
+                            </p>
+                            <div class="timeline__tags">
+                                <span class="skill-tag">YandexSDK</span>
+                                <span class="skill-tag">WebGL</span>
+                                <span class="skill-tag">Unity</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. QR-Games.ru -->
+                    <div class="timeline__item animate-on-scroll">
+                        <div class="timeline__marker"></div>
+                        <div class="timeline__card">
+                            <h3 class="timeline__title">Unity-разработчик — QR-Games.ru</h3>
+                            <span class="timeline__period">2025 — настоящее время</span>
+                            <p class="timeline__description">
+                                Пати-игры для компании. Реализация мультиплеера.
+                            </p>
+                            <div class="timeline__tags">
+                                <span class="skill-tag">Unity</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. Академия TOP -->
+                    <div class="timeline__item animate-on-scroll">
+                        <div class="timeline__marker"></div>
+                        <div class="timeline__card">
+                            <h3 class="timeline__title">Преподаватель IT — Академия TOP</h3>
+                            <span class="timeline__period">Март 2026 — настоящее время</span>
+                            <p class="timeline__description">
+                                Преподавание курса по Unity-разработке. Ведение дипломных проектов, подготовка методических материалов.
+                            </p>
+                            <div class="timeline__tags">
+                                <span class="skill-tag">C#</span>
+                                <span class="skill-tag">Unity</span>
+                                <span class="skill-tag">Teaching</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- Contact Section                              -->
+        <!-- ============================================ -->
+        <section id="contact" class="section contact">
+            <div class="container">
+                <h2 class="section-title animate-on-scroll">Контакты</h2>
+                <p class="section-subtitle animate-on-scroll">Свяжитесь со мной — буду рад новым знакомствам и предложениям</p>
+                <div class="contact__grid">
+
+                    <!-- Левая колонка: контактная информация -->
+                    <div class="contact__info animate-on-scroll">
+                        <div class="contact__item">
+                            <span class="contact__icon">📧</span>
+                            <a href="mailto:d3veloperg@yandex.ru" class="contact__link">d3veloperg@yandex.ru</a>
+                        </div>
+                        <div class="contact__item">
+                            <span class="contact__icon">📞</span>
+                            <a href="tel:+79155728178" class="contact__link">8-915-572-81-78</a>
+                        </div>
+                        <div class="contact__item">
+                            <span class="contact__icon">💬</span>
+                            <a href="https://t.me/d3veloperg" target="_blank" class="contact__link">@d3veloperg</a>
+                        </div>
+                        <div class="contact__item">
+                            <span class="contact__icon">💻</span>
+                            <a href="https://github.com/SemenMalyshev" target="_blank" class="contact__link">github.com/SemenMalyshev</a>
+                        </div>
+                        <div class="contact__item">
+                            <span class="contact__icon">📺</span>
+                            <a href="https://rutube.ru/channel/78499030" target="_blank" class="contact__link">Rutube-канал</a>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer__inner">
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTop" aria-label="Наверх">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </button>
+
+    <!-- Scripts -->
+    <script src="js/main.js" type="module"></script>
+    <script src="js/animations.js" type="module"></script>
+</body>
+</html>
