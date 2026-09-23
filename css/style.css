@@ -1299,6 +1299,17 @@ code {
     margin-bottom: 16px;
 }
 
+.education__directions {
+    list-style: disc;
+    padding-left: 22px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+.education__directions li + li {
+    margin-top: 8px;
+}
+
 .timeline__tags {
     display: flex;
     flex-wrap: wrap;

@@ -126,9 +126,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Инициализация stagger-индексов для таймлайна
     initTimelineStagger();
 
-    // Параллакс для Hero
-    initParallax();
-
     console.log('[Animations] Наблюдение за анимациями запущено.');
 });
 

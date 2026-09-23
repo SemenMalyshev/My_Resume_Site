@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initCodeNavigation();
     initScrollAnimations();
     initMobileNav();
-    initHighlight();
     initSmoothScroll();
     initHeaderScroll();
     initScrollToTop();
@@ -61,48 +60,76 @@ function initTheme() {
     });
 }
 
-/**
- * Навигация по архитектурной диаграмме
- * Использует делегирование событий на контейнере #code .container
- * Обрабатывает клики по .arch-item--clickable
- * При клике переключает соответствующую панель кода
- */
+/** Load the selected MapPinner source file into a compact, accessible viewer. */
 function initCodeNavigation() {
-    const container = document.querySelector('#code .container');
-    if (!container) return;
+    const fileList = document.querySelector('.code__navigator');
+    const viewer = document.getElementById('code-viewer');
+    const sourceBlock = document.getElementById('code-source');
+    const fileName = document.getElementById('code-file-name');
+    const fileGroup = document.getElementById('code-file-group');
+    const copyButton = document.getElementById('copy-code');
+    const status = document.getElementById('code-status');
+    const buttons = [...document.querySelectorAll('.arch-item--clickable[data-source]')];
+    if (!fileList || !viewer || !sourceBlock || !fileName || !fileGroup || !copyButton || !status || !buttons.length) return;
 
-    container.addEventListener('click', (e) => {
-        // Ищем кликабельный элемент диаграммы
-        const clickable = e.target.closest('.arch-item--clickable');
-        if (!clickable) return;
+    let requestNumber = 0;
 
-        const tabId = clickable.dataset.tab;
-        if (!tabId) return;
+    async function showFile(button, scrollToViewer = false) {
+        const currentRequest = ++requestNumber;
+        buttons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+        fileName.textContent = `${button.textContent.trim()}.cs`;
+        fileGroup.textContent = `${button.closest('.arch-layer').querySelector('.arch-layer__label').textContent} / C#`;
+        sourceBlock.textContent = 'Загрузка кода…';
+        sourceBlock.className = 'language-csharp';
+        sourceBlock.removeAttribute('data-highlighted');
+        copyButton.disabled = true;
+        copyButton.textContent = 'Копировать';
+        status.textContent = '';
+        viewer.setAttribute('aria-busy', 'true');
 
-        // Переключаем активную панель кода
-        const panels = document.querySelectorAll('.code__panel');
-        panels.forEach((p) => p.classList.remove('active'));
-        const targetPanel = document.getElementById(tabId);
-        if (targetPanel) {
-            targetPanel.classList.add('active');
-            // Переподсвечиваем код в активной панели (для новых блоков)
-            if (typeof hljs !== 'undefined') {
-                const codeBlocks = targetPanel.querySelectorAll('code');
-                codeBlocks.forEach((block) => {
-                    hljs.highlightElement(block);
-                });
-            }
+        if (scrollToViewer && window.matchMedia('(max-width: 980px)').matches) {
+            viewer.scrollIntoView({
+                behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+                block: 'start'
+            });
         }
 
-        // Скроллим к блоку с кодом (а не к началу секции, где диаграмма)
-        const codeExamples = document.querySelector('.code__examples');
-        if (codeExamples) {
-            const header = document.getElementById('header');
-            const headerHeight = header ? header.offsetHeight : 0;
-            const targetPosition = codeExamples.getBoundingClientRect().top + window.scrollY - headerHeight;
-            window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+        try {
+            const response = await fetch(button.dataset.source);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            const source = await response.text();
+            if (currentRequest !== requestNumber) return;
+            sourceBlock.textContent = source;
+            if (window.hljs) window.hljs.highlightElement(sourceBlock);
+            copyButton.disabled = false;
+            status.textContent = `Открыт файл ${fileName.textContent}`;
+        } catch (error) {
+            if (currentRequest !== requestNumber) return;
+            sourceBlock.textContent = 'Не удалось загрузить файл. Откройте исходный код на GitHub.';
+            status.textContent = 'Не удалось загрузить файл';
+            console.error('[Code viewer] Failed to load source:', error);
+        } finally {
+            if (currentRequest === requestNumber) viewer.setAttribute('aria-busy', 'false');
+        }
+    }
+
+    fileList.addEventListener('click', (event) => {
+        const button = event.target.closest('.arch-item--clickable[data-source]');
+        if (button && fileList.contains(button)) showFile(button, true);
+    });
+
+    copyButton.addEventListener('click', async () => {
+        try {
+            await navigator.clipboard.writeText(sourceBlock.textContent);
+            copyButton.textContent = 'Скопировано';
+            status.textContent = `Скопирован файл ${fileName.textContent}`;
+        } catch (error) {
+            status.textContent = 'Не удалось скопировать код';
+            console.error('[Code viewer] Failed to copy source:', error);
         }
     });
+
+    showFile(buttons[0]);
 }
 
 /**
@@ -129,13 +156,17 @@ function initSmoothScroll() {
 
         e.preventDefault();
 
+        if (window.location.hash !== targetId) {
+            window.history.pushState(null, '', targetId);
+        }
+
         const header = document.getElementById('header');
         const headerHeight = header ? header.offsetHeight : 0;
         const targetPosition = target.getBoundingClientRect().top + window.scrollY - headerHeight;
 
         window.scrollTo({
             top: targetPosition,
-            behavior: 'smooth',
+            behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
         });
     });
 }
@@ -206,7 +237,7 @@ function initScrollToTop() {
     btn.addEventListener('click', () => {
         window.scrollTo({
             top: 0,
-            behavior: 'smooth',
+            behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
         });
     });
 }
@@ -220,37 +251,34 @@ function initMobileNav() {
 
     if (!navToggle || !navList) return;
 
+    const closeMenu = () => {
+        navList.classList.remove('active');
+        navToggle.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+    };
+
     navToggle.addEventListener('click', () => {
         navList.classList.toggle('active');
         navToggle.classList.toggle('active');
+        navToggle.setAttribute('aria-expanded', String(navList.classList.contains('active')));
     });
 
     // Закрыть меню при клике на ссылку
     navList.addEventListener('click', (e) => {
         if (e.target.classList.contains('nav__link')) {
-            navList.classList.remove('active');
-            navToggle.classList.remove('active');
+            closeMenu();
         }
     });
 
     // Закрыть меню при клике вне навигации
     document.addEventListener('click', (e) => {
         if (!e.target.closest('.header__inner')) {
-            navList.classList.remove('active');
-            navToggle.classList.remove('active');
+            closeMenu();
         }
     });
-}
 
-/**
- * Инициализация highlight.js для подсветки синтаксиса
- */
-function initHighlight() {
-    if (typeof hljs !== 'undefined') {
-        hljs.highlightAll();
-        console.log('[Main] Highlight.js инициализирован.');
-    } else {
-        console.warn('[Main] Highlight.js не загружен.');
-    }
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeMenu();
+    });
 }
 
