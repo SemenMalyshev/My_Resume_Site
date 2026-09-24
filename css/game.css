@@ -331,6 +331,31 @@ body { line-height: 1.58; }
     font-size: .84rem;
 }
 .project-card__link:hover { border-color: var(--accent); background: var(--bg-card); color: var(--accent); box-shadow: none; transform: translateY(-2px); }
+.project-card__actions { display: flex; flex-wrap: wrap; gap: 10px; }
+body.map-demo-open { overflow: hidden; }
+.map-demo {
+    width: min(1200px, calc(100vw - 24px));
+    max-width: none;
+    max-height: calc(100dvh - 24px);
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #60758b;
+    border-radius: 22px;
+    background: #24364b;
+    color: #fff9ee;
+}
+.map-demo[open] { display: flex; flex-direction: column; }
+.map-demo::backdrop { background: rgba(13, 24, 37, .84); }
+.map-demo__header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: 15px 20px; }
+.map-demo__header h2 { margin: 0; font-size: 1.35rem; }
+.map-demo__header p { margin: 3px 0 0; color: #bac9d6; font-size: .8rem; }
+.map-demo__close { flex: none; width: 40px; height: 40px; border: 1px solid #60758b; border-radius: 10px; background: #344a61; color: #fff9ee; font-size: 1.7rem; cursor: pointer; }
+.map-demo__close:hover { border-color: #ffcb7d; color: #ffcb7d; }
+.map-demo__stage { position: relative; flex: 1; min-height: 0; height: min(70vh, 760px); background: #152335; }
+.map-demo__stage canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+.map-demo__status { position: absolute; inset: 0; display: grid; place-items: center; padding: 24px; background: #152335; color: #fff9ee; text-align: center; }
+.map-demo__status[hidden] { display: none; }
+.map-demo__hint { margin: 0; padding: 11px 20px 15px; color: #bac9d6; font-size: .76rem; line-height: 1.4; }
 .project-card--featured {
     grid-column: 1 / -1;
     display: grid;
@@ -535,6 +560,10 @@ body { line-height: 1.58; }
     .project-card--featured .project-card__placeholder { height: auto; aspect-ratio: 800 / 470; }
 }
 @media (max-width: 640px) {
+    .map-demo { width: 100vw; height: 100dvh; max-height: none; margin: 0; border: 0; border-radius: 0; }
+    .map-demo__header { padding: 10px 13px; }
+    .map-demo__stage { height: auto; }
+    .map-demo__hint { padding: 8px 13px; font-size: .7rem; }
     .container { padding-inline: 4px; }
     .section { padding-block: 78px; }
     .section-title { font-size: clamp(2.8rem, 11vw, 4rem); }

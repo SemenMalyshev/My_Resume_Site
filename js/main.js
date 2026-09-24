@@ -62,6 +62,7 @@ function initTheme() {
 
 /** Load the selected MapPinner source file into a compact, accessible viewer. */
 function initCodeNavigation() {
+    const sourceRoot = 'https://raw.githubusercontent.com/SemenMalyshev/MapPinner/main/';
     const fileList = document.querySelector('.code__navigator');
     const viewer = document.getElementById('code-viewer');
     const sourceBlock = document.getElementById('code-source');
@@ -77,10 +78,12 @@ function initCodeNavigation() {
     async function showFile(button, scrollToViewer = false) {
         const currentRequest = ++requestNumber;
         buttons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
-        fileName.textContent = `${button.textContent.trim()}.cs`;
-        fileGroup.textContent = `${button.closest('.arch-layer').querySelector('.arch-layer__label').textContent} / C#`;
+        const path = button.dataset.source;
+        const isJavaScript = path.endsWith('.jslib');
+        fileName.textContent = path.split('/').pop();
+        fileGroup.textContent = `${button.closest('.arch-layer').querySelector('.arch-layer__label').textContent} / ${isJavaScript ? 'JavaScript' : 'C#'}`;
         sourceBlock.textContent = 'Загрузка кода…';
-        sourceBlock.className = 'language-csharp';
+        sourceBlock.className = isJavaScript ? 'language-javascript' : 'language-csharp';
         sourceBlock.removeAttribute('data-highlighted');
         copyButton.disabled = true;
         copyButton.textContent = 'Копировать';
@@ -95,7 +98,7 @@ function initCodeNavigation() {
         }
 
         try {
-            const response = await fetch(button.dataset.source);
+            const response = await fetch(sourceRoot + path);
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
             const source = await response.text();
             if (currentRequest !== requestNumber) return;

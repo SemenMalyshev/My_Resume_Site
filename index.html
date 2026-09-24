@@ -173,6 +173,9 @@
                             <p class="about__text">
                                 Я разрабатываю игры и интерактивные приложения на Unity. Работаю с C#, архитектурой, оптимизацией и интеграцией SDK — от игровой механики до готовой сборки. Ещё преподаю IT-дисциплины.
                             </p>
+                            <p class="about__text">
+                                Использую ИИ-ассистентов для ускорения разработки: выстраиваю работу нескольких агентов, точно формулирую задачи и ограничения, самостоятельно проверяю код и результат.
+                            </p>
 
                             <!-- Блок с ключевыми цифрами -->
                             <div class="about__stats">
@@ -245,6 +248,8 @@
                             <span class="skill-tag">Git / GitHub / Git Flow</span>
                             <span class="skill-tag">VS Code</span>
                             <span class="skill-tag">VS Studio</span>
+                            <span class="skill-tag">ИИ-ассистенты и промптинг</span>
+                            <span class="skill-tag">Мультиагентные процессы</span>
                         </div>
                     </div>
 
@@ -394,17 +399,21 @@
                         </div>
                         <div class="project-card__body">
                             <div class="project-card__tags">
-                                <span class="project-card__tag project-card__tag--platform">Web</span>
+                                <span class="project-card__tag project-card__tag--platform">Unity · WebGL</span>
                             </div>
                             <h3 class="project-card__title">MapPinner</h3>
                             <p class="project-card__description">
-                                Веб-приложение для создания заметок на карте. Совместное редактирование в реальном времени.
+                                Проект на Unity, сделанный как тестовое задание для одной из организаций. Сохранил его для демонстрации интерактивной карты с метками, изображениями и аудио.
                             </p>
                             <div class="project-card__stack">
-                                <span class="project-card__stack-tag">JavaScript</span>
-                                <span class="project-card__stack-tag">Firebase</span>
+                                <span class="project-card__stack-tag">Unity</span>
+                                <span class="project-card__stack-tag">C#</span>
+                                <span class="project-card__stack-tag">WebGL</span>
                             </div>
-                            <a href="https://github.com/SemenMalyshev/MapPinner" target="_blank" class="project-card__link btn btn-primary">Исходный код</a>
+                            <div class="project-card__actions">
+                                <button type="button" id="open-map-demo" class="project-card__link btn btn-primary">Запустить MapPinner</button>
+                                <a href="https://github.com/SemenMalyshev/MapPinner" target="_blank" rel="noopener noreferrer" class="project-card__link btn btn-primary">Исходный код ↗</a>
+                            </div>
                         </div>
                     </div>
 
@@ -520,66 +529,47 @@
         <section id="code" class="section code">
             <div class="container">
                 <h2 class="section-title animate-on-scroll">Код MapPinner</h2>
-                <p class="section-subtitle animate-on-scroll">Выберите файл и посмотрите, как устроен проект на Unity.</p>
+                <p class="section-subtitle animate-on-scroll">Восемь файлов, показывающих логику карты, сохранение данных и работу с браузером.</p>
 
                 <div class="code__workbench">
                     <nav class="code__navigator" aria-label="Файлы проекта MapPinner">
                         <div class="code__navigator-heading">
                             <span class="code__eyebrow">MAP PINNER / UNITY</span>
-                            <h3>Структура проекта</h3>
-                            <p>22 файла в 6 группах</p>
+                            <h3>Ключевые файлы</h3>
+                            <p>Актуальный код из репозитория MapPinner</p>
                         </div>
                         <div class="arch-diagram">
                             <div class="arch-layer arch-layer--bootstrap">
                                 <div class="arch-layer__label">Bootstrap</div>
                                 <div class="arch-layer__items">
-                                    <button type="button" class="arch-item arch-item--clickable" data-source="assets/code/map-pinner/Bootstrap/GameInstaller.cs" aria-pressed="true">GameInstaller</button>
+                                    <button type="button" class="arch-item arch-item--clickable" data-source="UnityProject/Assets/Scripts/Bootstrap/GameInstaller.cs" aria-pressed="true">GameInstaller</button>
                                 </div>
                             </div>
                             <div class="arch-layer arch-layer--application">
                                 <div class="arch-layer__label">Application</div>
                                 <div class="arch-layer__items">
-                                    <button type="button" class="arch-item arch-item--clickable" data-source="assets/code/map-pinner/Application/PinInteractionSystem.cs" aria-pressed="false">PinInteractionSystem</button>
-                                    <button type="button" class="arch-item arch-item--clickable" data-source="assets/code/map-pinner/Application/PinCreationService.cs" aria-pressed="false">PinCreationService</button>
-                                    <button type="button" class="arch-item arch-item--clickable" data-source="assets/code/map-pinner/Application/PinSelectionService.cs" aria-pressed="false">PinSelectionService</button>
-                                    <button type="button" class="arch-item arch-item--clickable" data-source="assets/code/map-pinner/Application/MapPersistenceService.cs" aria-pressed="false">MapPersistenceService</button>
-                                    <button type="button" class="arch-item arch-item--clickable" data-source="assets/code/map-pinner/Application/CameraNavigationSystem.cs" aria-pressed="false">CameraNavigationSystem</button>
+                                    <button type="button" class="arch-item arch-item--clickable" data-source="UnityProject/Assets/Scripts/Application/PinInteractionSystem.cs" aria-pressed="false">PinInteractionSystem</button>
                                 </div>
                             </div>
                             <div class="arch-layer arch-layer--domain">
                                 <div class="arch-layer__label">Domain</div>
                                 <div class="arch-layer__items">
-                                    <button type="button" class="arch-item arch-item--clickable" data-source="assets/code/map-pinner/Domain/PinEntity.cs" aria-pressed="false">PinEntity</button>
-                                    <button type="button" class="arch-item arch-item--clickable" data-source="assets/code/map-pinner/Domain/PinId.cs" aria-pressed="false">PinId</button>
-                                    <button type="button" class="arch-item arch-item--clickable" data-source="assets/code/map-pinner/Domain/MapState.cs" aria-pressed="false">MapState</button>
-                                    <button type="button" class="arch-item arch-item--clickable" data-source="assets/code/map-pinner/Domain/MapData.cs" aria-pressed="false">MapData</button>
-                                    <button type="button" class="arch-item arch-item--clickable" data-source="assets/code/map-pinner/Domain/MapId.cs" aria-pressed="false">MapId</button>
+                                    <button type="button" class="arch-item arch-item--clickable" data-source="UnityProject/Assets/Scripts/Domain/MapState.cs" aria-pressed="false">MapState</button>
                                 </div>
                             </div>
                             <div class="arch-layer arch-layer--infrastructure">
                                 <div class="arch-layer__label">Infrastructure</div>
                                 <div class="arch-layer__items">
-                                    <button type="button" class="arch-item arch-item--clickable" data-source="assets/code/map-pinner/Infrastructure/IMapRepository.cs" aria-pressed="false">IMapRepository</button>
-                                    <button type="button" class="arch-item arch-item--clickable" data-source="assets/code/map-pinner/Infrastructure/JsonMapRepository.cs" aria-pressed="false">JsonMapRepository</button>
+                                    <button type="button" class="arch-item arch-item--clickable" data-source="UnityProject/Assets/Scripts/Infrastructure/JsonMapRepository.cs" aria-pressed="false">JsonMapRepository</button>
+                                    <button type="button" class="arch-item arch-item--clickable" data-source="UnityProject/Assets/Scripts/Infrastructure/BrowserMedia.cs" aria-pressed="false">BrowserMedia</button>
+                                    <button type="button" class="arch-item arch-item--clickable" data-source="UnityProject/Assets/Plugins/WebGL/BrowserMedia.jslib" aria-pressed="false">BrowserMedia.jslib</button>
                                 </div>
                             </div>
                             <div class="arch-layer arch-layer--presentation">
                                 <div class="arch-layer__label">Presentation</div>
                                 <div class="arch-layer__items">
-                                    <button type="button" class="arch-item arch-item--clickable" data-source="assets/code/map-pinner/Presentation/MapView.cs" aria-pressed="false">MapView</button>
-                                    <button type="button" class="arch-item arch-item--clickable" data-source="assets/code/map-pinner/Presentation/MapCameraView.cs" aria-pressed="false">MapCameraView</button>
-                                    <button type="button" class="arch-item arch-item--clickable" data-source="assets/code/map-pinner/Presentation/PinView.cs" aria-pressed="false">PinView</button>
-                                    <button type="button" class="arch-item arch-item--clickable" data-source="assets/code/map-pinner/Presentation/PinViewFactory.cs" aria-pressed="false">PinViewFactory</button>
-                                    <button type="button" class="arch-item arch-item--clickable" data-source="assets/code/map-pinner/Presentation/PinDetailPanel.cs" aria-pressed="false">PinDetailPanel</button>
-                                    <button type="button" class="arch-item arch-item--clickable" data-source="assets/code/map-pinner/Presentation/PinPreviewPanel.cs" aria-pressed="false">PinPreviewPanel</button>
-                                    <button type="button" class="arch-item arch-item--clickable" data-source="assets/code/map-pinner/Presentation/PinEditPanel.cs" aria-pressed="false">PinEditPanel</button>
-                                </div>
-                            </div>
-                            <div class="arch-layer arch-layer--input">
-                                <div class="arch-layer__label">Input</div>
-                                <div class="arch-layer__items">
-                                    <button type="button" class="arch-item arch-item--clickable" data-source="assets/code/map-pinner/Input/IMouseInput.cs" aria-pressed="false">IMouseInput</button>
-                                    <button type="button" class="arch-item arch-item--clickable" data-source="assets/code/map-pinner/Input/UnityMouseInput.cs" aria-pressed="false">UnityMouseInput</button>
+                                    <button type="button" class="arch-item arch-item--clickable" data-source="UnityProject/Assets/Scripts/Presentation/PinView.cs" aria-pressed="false">PinView</button>
+                                    <button type="button" class="arch-item arch-item--clickable" data-source="UnityProject/Assets/Scripts/Presentation/PinEditPanel.cs" aria-pressed="false">PinEditPanel</button>
                                 </div>
                             </div>
                         </div>
@@ -596,7 +586,7 @@
                         <p class="code__scroll-hint">Листайте код вбок ↔</p>
                         <pre class="code__pre"><code id="code-source" class="language-csharp">Загрузка кода…</code></pre>
                         <div class="code__viewer-footer">
-                            <span>Снимок исходников MapPinner</span>
+                            <span>Актуальный код MapPinner</span>
                             <a href="https://github.com/SemenMalyshev/MapPinner" target="_blank" rel="noopener noreferrer">Репозиторий на GitHub ↗</a>
                         </div>
                         <span class="code__status" id="code-status" role="status" aria-live="polite"></span>
@@ -786,6 +776,21 @@
 
     </main>
 
+    <dialog id="map-demo" class="map-demo" aria-labelledby="map-demo-title">
+        <div class="map-demo__header">
+            <div>
+                <h2 id="map-demo-title">MapPinner</h2>
+                <p>Тестовый проект на Unity · данные сохраняются в вашем браузере</p>
+            </div>
+            <button type="button" id="close-map-demo" class="map-demo__close" aria-label="Закрыть MapPinner">×</button>
+        </div>
+        <div class="map-demo__stage">
+            <canvas id="map-demo-canvas" width="960" height="600" tabindex="0" aria-label="Интерактивная карта MapPinner"></canvas>
+            <div id="map-demo-status" class="map-demo__status" role="status" aria-live="polite">Подготовка демо…</div>
+        </div>
+        <p class="map-demo__hint">Мышь: клик — метка, удержание — перемещение метки, правая кнопка — карта, колесо — масштаб. Телефон: касание — метка, удержание — перемещение, жесты — карта и масштаб.</p>
+    </dialog>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container footer__inner">
@@ -804,5 +809,6 @@
     <!-- Scripts -->
     <script src="js/main.js" type="module"></script>
     <script src="js/animations.js" type="module"></script>
+    <script src="js/map-demo.js" type="module"></script>
 </body>
 </html>
