@@ -18,6 +18,7 @@ if (openButton && closeButton && dialog && canvas && status) {
     let loadingPromise;
     let unityInstance;
     let closing = Promise.resolve();
+    const prefetchController = new AbortController();
 
     function loadScript() {
         if (!loaderPromise) {
@@ -43,15 +44,16 @@ if (openButton && closeButton && dialog && canvas && status) {
             productName: 'MapPinner',
             productVersion: '1.0',
         }, (progress) => {
-            status.textContent = `Загрузка MapPinner: ${Math.round(progress * 100)} %`;
+            status.textContent = `Загрузка MapPinner: ${Math.round(progress * 100)} % · первый запуск загружает около 18 МБ`;
         });
     }
 
     openButton.addEventListener('click', async () => {
+        prefetchController.abort();
         dialog.showModal();
         document.body.classList.add('map-demo-open');
         status.hidden = false;
-        status.textContent = 'Подготовка демо…';
+        status.textContent = 'Подготовка демо… Первый запуск загружает около 18 МБ.';
         await closing;
         if (!dialog.open) return;
 
@@ -79,10 +81,11 @@ if (openButton && closeButton && dialog && canvas && status) {
     });
 
     async function prefetchDemo() {
-        if (navigator.connection?.saveData) return;
+        if (navigator.connection?.saveData || prefetchController.signal.aborted) return;
         for (const url of assets) {
+            if (prefetchController.signal.aborted) break;
             try {
-                const response = await fetch(url, { priority: 'low' });
+                const response = await fetch(url, { priority: 'low', signal: prefetchController.signal });
                 if (!response.ok) break;
                 if (response.body) {
                     const reader = response.body.getReader();
@@ -91,7 +94,7 @@ if (openButton && closeButton && dialog && canvas && status) {
                     await response.blob();
                 }
             } catch (error) {
-                console.debug('[MapPinner] Background preload unavailable:', error);
+                if (error.name !== 'AbortError') console.debug('[MapPinner] Background preload unavailable:', error);
                 break;
             }
         }
