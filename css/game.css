@@ -335,6 +335,7 @@ body { line-height: 1.58; }
 body.map-demo-open { overflow: hidden; }
 .map-demo {
     width: min(1200px, calc(100vw - 24px));
+    height: min(800px, calc(100dvh - 24px));
     max-width: none;
     max-height: calc(100dvh - 24px);
     padding: 0;
@@ -352,7 +353,7 @@ body.map-demo-open { overflow: hidden; }
 .map-demo__close { flex: none; width: 40px; height: 40px; border: 1px solid #60758b; border-radius: 10px; background: #344a61; color: #fff9ee; font-size: 1.7rem; cursor: pointer; }
 .map-demo__close:hover { border-color: #ffcb7d; color: #ffcb7d; }
 .map-demo__stage { position: relative; flex: 1; min-height: 0; height: min(70vh, 760px); background: #152335; }
-.map-demo__stage canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+.map-demo__stage canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; touch-action: none; }
 .map-demo__status { position: absolute; inset: 0; display: grid; place-items: center; padding: 24px; background: #152335; color: #fff9ee; text-align: center; }
 .map-demo__status[hidden] { display: none; }
 .map-demo__hint { margin: 0; padding: 11px 20px 15px; color: #bac9d6; font-size: .76rem; line-height: 1.4; }
