@@ -117,7 +117,7 @@
                     <li><a href="#about" class="nav__link">Обо мне</a></li>
                     <li><a href="#skills" class="nav__link">Навыки</a></li>
                     <li><a href="#projects" class="nav__link">Проекты</a></li>
-                    <li><a href="#code" class="nav__link">Код</a></li>
+                    <li><a href="#code" class="nav__link">MapPinner</a></li>
                     <li><a href="#experience" class="nav__link">Опыт</a></li>
                     <li><a href="#education" class="nav__link">Образование</a></li>
                     <li><a href="#contact" class="nav__link">Контакты</a></li>
@@ -392,32 +392,7 @@
                         </div>
                     </div>
 
-                    <!-- 3. MapPinner -->
-                    <div class="project-card project-card--map animate-on-scroll">
-                        <div class="project-card__placeholder">
-                            <img src="assets/images/map-pinner.png" alt="Карта из проекта MapPinner" loading="lazy" decoding="async" width="627" height="767">
-                        </div>
-                        <div class="project-card__body">
-                            <div class="project-card__tags">
-                                <span class="project-card__tag project-card__tag--platform">Unity · WebGL</span>
-                            </div>
-                            <h3 class="project-card__title">MapPinner</h3>
-                            <p class="project-card__description">
-                                Проект на Unity, сделанный как тестовое задание для одной из организаций. Сохранил его для демонстрации интерактивной карты с метками, изображениями и аудио.
-                            </p>
-                            <div class="project-card__stack">
-                                <span class="project-card__stack-tag">Unity</span>
-                                <span class="project-card__stack-tag">C#</span>
-                                <span class="project-card__stack-tag">WebGL</span>
-                            </div>
-                            <div class="project-card__actions">
-                                <button type="button" id="open-map-demo" class="project-card__link btn btn-primary">Запустить MapPinner</button>
-                                <a href="https://github.com/SemenMalyshev/MapPinner" target="_blank" rel="noopener noreferrer" class="project-card__link btn btn-primary">Исходный код ↗</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 4. Проекты для Яндекс Игр -->
+                    <!-- Проекты для Яндекс Игр -->
                     <div class="project-card project-card--yandex animate-on-scroll">
                         <a class="project-card__placeholder" href="https://yandex.ru/games/" target="_blank" rel="noopener noreferrer" aria-label="Открыть Яндекс Игры">
                             <img src="assets/images/yandex-games.png" alt="Официальное изображение платформы Яндекс Игры" loading="lazy" decoding="async" width="1200" height="1200">
@@ -439,7 +414,7 @@
                         </div>
                     </div>
 
-                    <!-- 5. Преподавание в Академии TOP -->
+                    <!-- Преподавание в Академии TOP -->
                     <div class="project-card project-card--academy animate-on-scroll">
                         <div class="project-card__placeholder">
                             <img src="assets/images/top-academy-hero-1.png" alt="Студенты Академии ТОП на изображении с сайта академии" loading="lazy" decoding="async" width="720" height="675">
@@ -524,12 +499,34 @@
         </section>
 
         <!-- ============================================ -->
-        <!-- Code & Architecture Section                  -->
+        <!-- MapPinner project and code                    -->
         <!-- ============================================ -->
         <section id="code" class="section code">
             <div class="container">
-                <h2 class="section-title animate-on-scroll">Код MapPinner</h2>
-                <p class="section-subtitle animate-on-scroll">Восемь файлов, показывающих логику карты, сохранение данных и работу с браузером.</p>
+                <h2 class="section-title animate-on-scroll">MapPinner</h2>
+                <p class="section-subtitle animate-on-scroll">Тестовое задание на Unity, которое я сохранил для демонстрации.</p>
+
+                <div class="code__project animate-on-scroll">
+                    <div class="code__project-image">
+                        <img src="assets/images/map-pinner.png" alt="Карта из проекта MapPinner" loading="lazy" decoding="async" width="627" height="767">
+                    </div>
+                    <div class="code__project-body">
+                        <span class="project-card__tag project-card__tag--platform">Unity · WebGL</span>
+                        <h3>Интерактивная карта с метками</h3>
+                        <p>Можно создавать и редактировать метки, прикреплять изображения и аудио. Данные сохраняются локально в браузере.</p>
+                        <div class="project-card__stack">
+                            <span class="project-card__stack-tag">Unity</span>
+                            <span class="project-card__stack-tag">C#</span>
+                            <span class="project-card__stack-tag">WebGL</span>
+                        </div>
+                        <div class="project-card__actions">
+                            <button type="button" id="open-map-demo" class="project-card__link btn btn-primary">Запустить MapPinner</button>
+                            <a href="https://github.com/SemenMalyshev/MapPinner" target="_blank" rel="noopener noreferrer" class="project-card__link btn btn-primary">Исходный код ↗</a>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="code__intro animate-on-scroll">Ниже — восемь ключевых файлов: логика карты, сохранение данных и работа с браузером.</p>
 
                 <div class="code__workbench">
                     <nav class="code__navigator" aria-label="Файлы проекта MapPinner">
