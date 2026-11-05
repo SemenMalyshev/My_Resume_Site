@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="ru" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Портфолио Unity-разработчика. Разработка игр и интерактивных приложений на Unity.">
-    <meta name="keywords" content="Unity, разработчик, портфолио, геймдев, C#, игры, разработка игр">
-
-    <script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Семён Малышев — Unity-разработчик. C#, WebGL, игровые механики, мультиплеер и выпуск игр. Портфолио проектов и примеры кода.">
+<meta name="keywords" content="Unity, C#, WebGL, разработчик, портфолио, игры">
+<script src="js/language.js"></script>
+<script>
         document.documentElement.classList.add('js');
         try {
             document.documentElement.dataset.theme = localStorage.getItem('theme') ||
@@ -15,16 +15,13 @@
             document.documentElement.dataset.theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         }
     </script>
-
-    <!-- Preconnect для внешних CDN -->
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-
-    <!-- Highlight.js -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" defer></script>
-
-    <!-- Critical CSS: встроен в head для мгновенного рендеринга -->
-    <style>
+<!-- Preconnect для внешних CDN -->
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<!-- Highlight.js -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" defer></script>
+<!-- Critical CSS: встроен в head для мгновенного рендеринга -->
+<style>
         /* ----- CSS Variables ----- */
         :root {
             --bg-primary: #0a0a0f;
@@ -95,717 +92,401 @@
         .nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
         .nav-toggle span{display:block;width:24px;height:2px;background:var(--text-primary);border-radius:2px}
     </style>
-
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/design.css">
-    <link rel="stylesheet" href="css/game.css">
-
-    <!-- Favicon (emoji fallback) -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
-
-    <title>Семён Малышев — Unity-разработчик</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/design.css">
+<link rel="stylesheet" href="css/game.css">
+<!-- Favicon (emoji fallback) -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
+<text y='.9em' font-size='90'>🎮</text></svg>">
+<title>Семён Малышев — Unity-разработчик</title>
+<link rel="canonical" href="https://d3veloperg.ru/?lang=ru">
+<link rel="alternate" hreflang="ru" href="https://d3veloperg.ru/?lang=ru">
+<link rel="alternate" hreflang="en" href="https://d3veloperg.ru/en.html">
+<link rel="alternate" hreflang="x-default" href="https://d3veloperg.ru/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Семён Малышев — Unity-разработчик">
+<meta property="og:description" content="Семён Малышев — Unity-разработчик. C#, WebGL, игровые механики, мультиплеер и выпуск игр. Портфолио проектов и примеры кода.">
+<meta property="og:url" content="https://d3veloperg.ru/?lang=ru">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="https://d3veloperg.ru/assets/images/qr-fish-arena.png">
 </head>
 <body>
-
-    <!-- Header / Навигация -->
-    <header class="header" id="header">
-        <div class="container header__inner">
-            <a href="#" class="logo gradient-text">d3veloperg</a>
-            <nav class="nav" id="nav">
-                <ul class="nav__list">
-                    <li><a href="#hero" class="nav__link">Главная</a></li>
-                    <li><a href="#about" class="nav__link">Обо мне</a></li>
-                    <li><a href="#skills" class="nav__link">Навыки</a></li>
-                    <li><a href="#projects" class="nav__link">Проекты</a></li>
-                    <li><a href="#code" class="nav__link">MapPinner</a></li>
-                    <li><a href="#experience" class="nav__link">Опыт</a></li>
-                    <li><a href="#education" class="nav__link">Образование</a></li>
-                    <li><a href="#contact" class="nav__link">Контакты</a></li>
-                </ul>
-            </nav>
-            <div class="header__actions">
-                <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">☀️</button>
-                <button class="nav-toggle" id="navToggle" aria-label="Меню" aria-controls="nav" aria-expanded="false">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
+<a href="#main" class="skip-link">К содержимому</a>
+<header class="header" id="header">
+<div class="container header__inner">
+<a href="#hero" class="logo gradient-text">d3veloperg</a>
+<nav class="nav" id="nav" aria-label="Основная навигация">
+<ul class="nav__list">
+<li>
+<a href="#projects" class="nav__link">Проекты</a></li>
+<li>
+<a href="#code" class="nav__link">MapPinner</a></li>
+<li>
+<a href="#skills" class="nav__link">Навыки</a></li>
+<li>
+<a href="#experience" class="nav__link">Опыт</a></li>
+<li>
+<a href="#contact" class="nav__link">Контакты</a></li></ul></nav>
+<div class="header__actions">
+<nav class="language-switch" aria-label="Язык сайта">
+<a href="./?lang=ru" data-language="ru" lang="ru" hreflang="ru" aria-label="Русский" aria-current="page">RU</a>
+<a href="en.html" data-language="en" lang="en" hreflang="en" aria-label="English">EN</a></nav>
+<button type="button" class="theme-toggle" id="themeToggle" aria-label="Переключить тему">☀️</button>
+<button type="button" class="nav-toggle" id="navToggle" aria-label="Меню" aria-controls="nav" aria-expanded="false"><span></span><span></span><span></span></button>
         </div>
-    </header>
-
-    <!-- Main Content -->
-    <main>
-
-        <!-- ============================================ -->
-        <!-- Hero Section                                 -->
-        <!-- ============================================ -->
-        <section id="hero" class="section hero">
-            <div class="container hero__inner">
-                <div class="hero__copy">
-                    <p class="hero__greeting animate-on-scroll">Unity-разработчик · C#</p>
-                    <h1 class="hero__title animate-on-scroll">Семён<br><span>Малышев</span></h1>
-                    <p class="hero__subtitle animate-on-scroll">
-                        Делаю игры и интерактивные проекты на Unity — от игровой механики до надёжного C# кода.
-                    </p>
-                    <div class="hero__actions animate-on-scroll">
-                        <a href="#projects" class="btn btn-primary">Смотреть проекты <span aria-hidden="true">↗</span></a>
-                        <a href="#contact" class="btn btn-secondary">Связаться</a>
-                    </div>
-                </div>
-                <div class="hero__portrait animate-on-scroll">
-                    <img src="assets/images/MyPhoto.jpg" alt="Семён Малышев" width="600" height="713" fetchpriority="high">
-                    <span class="hero__portrait-caption">Семён Малышев <span> / Unity Developer</span></span>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============================================ -->
-        <!-- About Section                                -->
-        <!-- ============================================ -->
-        <section id="about" class="section about">
-            <div class="container">
-                <h2 class="section-title animate-on-scroll">Обо мне</h2>
-                <p class="section-subtitle animate-on-scroll">Разработка игр, код и преподавание</p>
-                <div class="about__content">
-                    <div class="about__grid">
-                        <div class="about__info animate-on-scroll">
-                            <p class="about__text">
-                                Я разрабатываю игры и интерактивные приложения на Unity. Работаю с C#, архитектурой, оптимизацией и интеграцией SDK — от игровой механики до готовой сборки. Ещё преподаю IT-дисциплины.
-                            </p>
-                            <p class="about__text">
-                                Использую ИИ-ассистентов для ускорения разработки: выстраиваю работу нескольких агентов, точно формулирую задачи и ограничения, самостоятельно проверяю код и результат.
-                            </p>
-
-                            <!-- Блок с ключевыми цифрами -->
-                            <div class="about__stats">
-                                <div class="stat-card">
-                                    <span class="stat-card__number gradient-text">3+</span>
-                                    <span class="stat-card__label">Года коммерческой разработки</span>
-                                </div>
-                                <div class="stat-card">
-                                    <span class="stat-card__number gradient-text">20+</span>
-                                    <span class="stat-card__label">Опубликованных проектов</span>
-                                </div>
-                                <div class="stat-card">
-                                    <span class="stat-card__number gradient-text">🎓</span>
-                                    <span class="stat-card__label">Имеется опыт преподавания</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    </div></header>
+<main id="main">
+<section id="hero" class="section hero">
+<div class="container hero__inner">
+<div class="hero__copy">
+<p class="hero__greeting animate-on-scroll">Unity Developer · C# · WebGL</p>
+<h1 class="hero__title animate-on-scroll">Семён<br><span>Малышев</span></h1>
+<p class="hero__subtitle animate-on-scroll">Создаю игры на Unity, разрабатываю игровые механики и сетевое взаимодействие. Переношу проекты на WebGL, оптимизирую сборки и довожу игры до релиза.</p>
+<p class="hero__availability animate-on-scroll">Рассматриваю удалённую работу и офис в Санкт-Петербурге.</p>
+<div class="hero__actions animate-on-scroll">
+<a href="#projects" class="btn btn-primary">Посмотреть проекты <span aria-hidden="true">↗</span></a>
+<a href="#contact" class="btn btn-secondary">Связаться</a></div>
+        </div>
+<div class="hero__portrait animate-on-scroll">
+<img src="assets/images/MyPhoto.jpg" alt="Семён Малышев" width="600" height="713" fetchpriority="high"><span class="hero__portrait-caption">Семён Малышев<span> / Unity Developer</span></span></div>
+    </div></section>
+<section id="projects" class="section projects">
+<div class="container">
+<h2 class="section-title animate-on-scroll">Проекты</h2>
+<p class="section-subtitle animate-on-scroll">Выпущенные игры, проектная разработка и мой вклад в результат.</p>
+<article class="qr-case" aria-labelledby="qr-title">
+<div class="project-card project-card--featured">
+<div class="project-card__placeholder">
+<img src="assets/images/qr-fish-fire.webp" alt="Fish Fire — игра платформы QR-Games" loading="lazy" decoding="async" width="720" height="720"></div>
+<div class="project-card__body"><span class="case-eyebrow">Главный кейс · собственные игры</span>
+<h3 id="qr-title" class="project-card__title">QR-Games</h3>
+<p class="project-card__description">Игры для компании: общий экран показывает игру, а смартфоны становятся контроллерами. От игровых механик на Unity до браузерной платформы и выпуска игр.</p>
+<div class="project-card__stack"><span class="project-card__stack-tag">Unity</span><span class="project-card__stack-tag">C#</span><span class="project-card__stack-tag">WebGL</span><span class="project-card__stack-tag">WebSocket</span></div>
+<a href="https://qrgames.fun/" target="_blank" rel="noopener noreferrer" class="project-card__link btn btn-primary">Открыть платформу <span aria-hidden="true">↗</span></a>
                 </div>
             </div>
-        </section>
-
-        <!-- ============================================ -->
-        <!-- Skills Section                               -->
-        <!-- ============================================ -->
-        <section id="skills" class="section skills">
-            <div class="container">
-                <h2 class="section-title animate-on-scroll">Навыки</h2>
-                <p class="section-subtitle animate-on-scroll">Инструменты, с которыми я собираю проекты</p>
-                <div class="skills__grid">
-
-                    <!-- Unity & C# -->
-                    <div class="skill-category animate-on-scroll">
-                        <div class="skill-category__header">
-                            <span class="skill-category__icon">🎮</span>
-                            <h3 class="skill-category__title">Unity & C#</h3>
-                        </div>
-                        <div class="skill-category__tags">
-                            <span class="skill-tag">C# (LINQ, async/await, DI)</span>
-                            <span class="skill-tag">Unity Engine (2020.3+)</span>
-                            <span class="skill-tag">Unity UI / uGUI</span>
-                            <span class="skill-tag">Addressables / Asset Bundles</span>
-                            <span class="skill-tag">DOTween</span>
-                            <span class="skill-tag">ECS (Entities)</span>
-                            <span class="skill-tag">WebGL-сборки</span>
-                        </div>
-                    </div>
-
-                    <!-- Web -->
-                    <div class="skill-category animate-on-scroll">
-                        <div class="skill-category__header">
-                            <span class="skill-category__icon">🌐</span>
-                            <h3 class="skill-category__title">Web</h3>
-                        </div>
-                        <div class="skill-category__tags">
-                            <span class="skill-tag">JavaScript (базовый)</span>
-                            <span class="skill-tag">HTML5 / CSS3</span>
-                            <span class="skill-tag">REST API</span>
-                            <span class="skill-tag">WebSocket</span>
-                        </div>
-                    </div>
-
-                    <!-- Инструменты -->
-                    <div class="skill-category animate-on-scroll">
-                        <div class="skill-category__header">
-                            <span class="skill-category__icon">🛠</span>
-                            <h3 class="skill-category__title">Инструменты</h3>
-                        </div>
-                        <div class="skill-category__tags">
-                            <span class="skill-tag">Git / GitHub / Git Flow</span>
-                            <span class="skill-tag">VS Code</span>
-                            <span class="skill-tag">VS Studio</span>
-                            <span class="skill-tag">ИИ-ассистенты и промптинг</span>
-                            <span class="skill-tag">Мультиагентные процессы</span>
-                        </div>
-                    </div>
-
-                    <!-- SDK & Платформы -->
-                    <div class="skill-category animate-on-scroll">
-                        <div class="skill-category__header">
-                            <span class="skill-category__icon">📦</span>
-                            <h3 class="skill-category__title">SDK & Платформы</h3>
-                        </div>
-                        <div class="skill-category__tags">
-                            <span class="skill-tag">YandexSDK (Yandex Games)</span>
-                            <span class="skill-tag">MirraSDK</span>
-                            <span class="skill-tag">Playgamma SDK</span>
-                            <span class="skill-tag">WebGL / Mobile / PC</span>
-                        </div>
-                    </div>
-
-                    <!-- Дизайн -->
-                    <div class="skill-category animate-on-scroll">
-                        <div class="skill-category__header">
-                            <span class="skill-category__icon">🎨</span>
-                            <h3 class="skill-category__title">Дизайн</h3>
-                        </div>
-                        <div class="skill-category__tags">
-                            <span class="skill-tag">Figma</span>
-                            <span class="skill-tag">Photoshop</span>
-                            <span class="skill-tag">Blender</span>
-                            <span class="skill-tag">Aseprite</span>
-                        </div>
-                    </div>
-
-                    <!-- Дополнительный стек -->
-                    <div class="skill-category animate-on-scroll">
-                        <div class="skill-category__header">
-                            <span class="skill-category__icon">🧩</span>
-                            <h3 class="skill-category__title">Дополнительно</h3>
-                        </div>
-                        <div class="skill-category__tags">
-                            <span class="skill-tag">Разработка лендингов (HTML/CSS/JS)</span>
-                            <span class="skill-tag">Telegram-боты (C#, .NET)</span>
-                            <span class="skill-tag">Адаптивная вёрстка</span>
-                        </div>
-                    </div>
-
+<div class="qr-case__content">
+<h3 class="case-heading">Мой вклад</h3>
+<div class="case-role-grid">
+<div class="case-role">
+<h4>Игры на Unity</h4>
+<p>Самостоятельно разработал все игры текущего каталога и довёл их до релиза: игровые механики, управление со смартфона и многопользовательское взаимодействие.</p></div>
+<div class="case-role">
+<h4>Веб-платформа</h4>
+<p>Выполнил основную работу над сайтом и серверной частью, интегрировал игры с платформой. В разработке веб-части также использовал ИИ-инструменты.</p></div>
+<div class="case-role">
+<h4>Релиз и сопровождение</h4>
+<p>Подготавливал WebGL-сборки, занимался размещением, настройкой сайта и сервера. Поддерживаю игры и платформу после выпуска.</p></div>
                 </div>
+<h3 class="case-heading">Выпущенные игры</h3>
+<div class="game-catalog">
+<article class="game-tile">
+<img src="assets/images/qr-mini-golf.webp" alt="MiniGolf Gyro" width="720" height="450" loading="lazy" decoding="async">
+<div class="game-tile__body">
+<h4>MiniGolf Gyro</h4>
+<p>Мини-гольф с управлением гироскопом смартфона.</p>
+<a href="https://qrgames.fun/games/5" target="_blank" rel="noopener noreferrer" class="game-tile__link">Открыть игру <span aria-hidden="true">↗</span></a></div></article>
+<article class="game-tile">
+<img src="assets/images/qr-air-battle.webp" alt="Air Battle" width="720" height="450" loading="lazy" decoding="async">
+<div class="game-tile__body">
+<h4>Air Battle</h4>
+<p>Воздушные сражения с управлением со смартфона.</p>
+<a href="https://qrgames.fun/games/4" target="_blank" rel="noopener noreferrer" class="game-tile__link">Открыть игру <span aria-hidden="true">↗</span></a></div></article>
+<article class="game-tile">
+<img src="assets/images/qr-fish-fire.webp" alt="Fish Fire" width="720" height="450" loading="lazy" decoding="async">
+<div class="game-tile__body">
+<h4>Fish Fire</h4>
+<p>Двумерный шутер с рыбами и мультиплеером.</p>
+<a href="https://qrgames.fun/games/3" target="_blank" rel="noopener noreferrer" class="game-tile__link">Открыть игру <span aria-hidden="true">↗</span></a></div></article>
+<article class="game-tile">
+<img src="assets/images/qr-football.webp" alt="Football Rumble" width="720" height="450" loading="lazy" decoding="async">
+<div class="game-tile__body">
+<h4>Football Rumble</h4>
+<p>Аркадный футбол для компании на общем экране.</p>
+<a href="https://qrgames.fun/games/1" target="_blank" rel="noopener noreferrer" class="game-tile__link">Открыть игру <span aria-hidden="true">↗</span></a></div></article>
+<article class="game-tile">
+<img src="assets/images/qr-brawl-slash.webp" alt="Brawl Slash" width="720" height="450" loading="lazy" decoding="async">
+<div class="game-tile__body">
+<h4>Brawl Slash</h4>
+<p>Двумерные бои с управлением со смартфонов.</p>
+<a href="https://qrgames.fun/games/2" target="_blank" rel="noopener noreferrer" class="game-tile__link">Открыть игру <span aria-hidden="true">↗</span></a></div></article></div>
+<details class="case-details">
+<summary>Как устроен проект</summary>
+<div class="case-details__body">
+<p class="case-note">Игры и веб-платформа — отдельные части проекта со своим стеком.</p>
+<div class="case-stack"><span class="project-card__stack-tag">Unity / C#</span><span class="project-card__stack-tag">SvelteKit / TypeScript</span><span class="project-card__stack-tag">Node.js</span><span class="project-card__stack-tag">HTTP / WebSocket / WSS</span><span class="project-card__stack-tag">PostgreSQL / Drizzle</span></div>
+<ol class="case-flow">
+<li><strong>Общий экран</strong>
+<p>Unity WebGL запускает игру в браузере. Игровая логика и механики находятся в Unity-проектах.</p></li>
+<li><strong>Смартфоны игроков</strong>
+<p>Браузерные контроллеры передают действия игроков; WebSocket связывает участников с общей игрой.</p></li>
+<li><strong>Веб-платформа и сервер</strong>
+<p>SvelteKit и Node.js обслуживают страницы, HTTP API и WebSocket-соединения. nginx обеспечивает HTTPS/WSS.</p></li>
+<li><strong>Данные платформы</strong>
+<p>PostgreSQL и Drizzle используются для данных пользователей и сессий. Игры публикуются как отдельные WebGL-сборки.</p></li>
+                    </ol>
+<p class="case-note">Результат — выпущенные игры и единая платформа для запуска и подключения игроков.</p>
+                </div></details>
+<div class="case-videos">
+<h3 class="case-heading">Геймплей</h3>
+<div class="video__grid">
+<div class="video__card">
+<h4 class="video__title">ToyAirDogs</h4>
+<div class="video__embed">
+<iframe width="720" height="405" loading="lazy" src="https://rutube.ru/play/embed/be09c12149055dc80383557c0fa18442" title="Геймплей: ToyAirDogs" allowfullscreen allow="encrypted-media"></iframe></div><a class="video__watch" href="https://rutube.ru/video/be09c12149055dc80383557c0fa18442/" target="_blank" rel="noopener noreferrer">Открыть на Rutube ↗</a></div>
+<div class="video__card">
+<h4 class="video__title">QR-FishArena</h4>
+<div class="video__embed">
+<iframe width="720" height="405" loading="lazy" src="https://rutube.ru/play/embed/f94c72b9a376e66cce2437f94bcac69c" title="Геймплей: QR-FishArena" allowfullscreen allow="encrypted-media"></iframe></div><a class="video__watch" href="https://rutube.ru/video/f94c72b9a376e66cce2437f94bcac69c/" target="_blank" rel="noopener noreferrer">Открыть на Rutube ↗</a></div>
+                </div></div>
             </div>
-        </section>
-
-        <!-- ============================================ -->
-        <!-- Projects Section                             -->
-        <!-- ============================================ -->
-        <section id="projects" class="section projects">
-            <div class="container">
-                <h2 class="section-title animate-on-scroll">Проекты</h2>
-                <p class="section-subtitle animate-on-scroll">Игры и приложения, над которыми я работал</p>
-
-                <div class="projects__grid">
-
-                    <!-- Главный проект: QR-Games -->
-                    <div class="project-card project-card--featured animate-on-scroll">
-                        <div class="project-card__placeholder project-card__placeholder--qr">
-                            <img src="assets/images/qr-fish-arena.png" alt="Заставка QR-FishArena — игры платформы QR-Games" loading="lazy" decoding="async" width="1024" height="1024">
-                        </div>
-                        <div class="project-card__body">
-                            <div class="project-card__tags">
-                                <span class="project-card__tag project-card__tag--platform">Web, Mobile</span>
-                            </div>
-                            <h3 class="project-card__title">QR-Games</h3>
-                            <p class="project-card__description">
-                                Игры с необычным управлением. Разработка игр, реализация мультиплеера, настройка сайта и сервера, обслуживание сайта.
-                            </p>
-                            <div class="project-card__stack">
-                                <span class="project-card__stack-tag">Unity</span>
-                            </div>
-                            <a href="https://qrgames.fun/" target="_blank" class="project-card__link btn btn-primary">Смотреть проект <span aria-hidden="true">↗</span></a>
-                        </div>
+        </article>
+<h3 class="case-heading">Другие проекты</h3>
+<div class="projects__grid projects__grid--supporting">
+<article class="project-card animate-on-scroll">
+<div class="project-card__placeholder">
+<img src="assets/images/obbi-1.jpg" alt="Кради и Лови Обби: Мини-Игры" width="800" height="470" loading="lazy" decoding="async"></div>
+<div class="project-card__body">
+<div class="project-card__tags"><span class="project-card__tag project-card__tag--platform">Яндекс Игры</span></div>
+<h4 class="project-card__title">Кради и Лови Обби: Мини-Игры</h4>
+<p class="project-card__description">Проектная разработка для MirraGames. Участие в работе над Unity-игрой, опубликованной на Яндекс Играх.</p>
+<div class="project-card__stack"><span class="project-card__stack-tag">Unity</span><span class="project-card__stack-tag">WebGL</span><span class="project-card__stack-tag">MirraGames</span></div>
+<a href="https://yandex.ru/games/app/kradi-i-lovi-obbi-mini-igry-494695" target="_blank" rel="noopener noreferrer" class="project-card__link">Смотреть проект <span aria-hidden="true">↗</span></a></div></article>
+<article class="project-card animate-on-scroll">
+<div class="project-card__placeholder">
+<img src="assets/images/shawarma-1.jpg" alt="Scary Shawarma Kiosk" width="800" height="470" loading="lazy" decoding="async"></div>
+<div class="project-card__body">
+<div class="project-card__tags"><span class="project-card__tag project-card__tag--platform">Яндекс Игры</span></div>
+<h4 class="project-card__title">Scary Shawarma Kiosk</h4>
+<p class="project-card__description">Проектное сотрудничество с Hidden Miracles Studio. Участие в разработке опубликованной Unity-игры.</p>
+<div class="project-card__stack"><span class="project-card__stack-tag">Unity</span><span class="project-card__stack-tag">WebGL</span><span class="project-card__stack-tag">Hidden Miracles</span></div>
+<a href="https://yandex.ru/games/app/scary-shawarma-kiosk-504555?lang=ru" target="_blank" rel="noopener noreferrer" class="project-card__link">Смотреть проект <span aria-hidden="true">↗</span></a></div></article>
+<article class="project-card animate-on-scroll">
+<div class="project-card__placeholder">
+<img src="assets/images/strannaya-udacha.png" alt="Очень странная удача" width="800" height="470" loading="lazy" decoding="async"></div>
+<div class="project-card__body">
+<div class="project-card__tags"><span class="project-card__tag project-card__tag--platform">MyIndie · Game jam</span></div>
+<h4 class="project-card__title">Очень странная удача</h4>
+<p class="project-card__description">Командный Unity-проект для MyIndie January Rush Lvl 8. Моя роль — разработчик. Видеозапись сохранила рабочее название QR-Clover.</p>
+<div class="project-card__stack"><span class="project-card__stack-tag">Unity</span><span class="project-card__stack-tag">Windows</span><span class="project-card__stack-tag">Game jam</span></div>
+<a href="https://myindie.net/games/game/ochen-strannaya-udacha" target="_blank" rel="noopener noreferrer" class="project-card__link">Смотреть проект <span aria-hidden="true">↗</span></a>
+<details class="project-video">
+<summary>Геймплей: QR-Clover</summary>
+<div class="video__embed">
+<iframe width="720" height="405" loading="lazy" src="https://rutube.ru/play/embed/c13c4e42937b3d029f769a682dfbbf28" title="Геймплей: Очень странная удача / QR-Clover" allowfullscreen allow="encrypted-media"></iframe></div><a class="video__watch" href="https://rutube.ru/video/c13c4e42937b3d029f769a682dfbbf28/" target="_blank" rel="noopener noreferrer">Открыть на Rutube ↗</a></details></div></article></div></div></section>
+<section id="code" class="section code">
+<div class="container">
+<h2 class="section-title animate-on-scroll">MapPinner</h2>
+<p class="section-subtitle animate-on-scroll">Тестовое задание на Unity, которое я сохранил для демонстрации.</p>
+<div class="code__project animate-on-scroll">
+<div class="code__project-image">
+<img src="assets/images/map-pinner.png" alt="Карта из проекта MapPinner" loading="lazy" decoding="async" width="627" height="767">
                     </div>
-
-                    <!-- Кради и Лови Обби: Мини-Игры — MirraGames -->
-                    <div class="project-card project-card--spotlight animate-on-scroll">
-                        <div class="project-card__placeholder">
-                            <img src="assets/images/obbi-1.jpg" alt="Заставка игры «Кради и Лови Обби: Мини-Игры»" loading="lazy" decoding="async" width="800" height="470">
-                        </div>
-                        <div class="project-card__body">
-                            <div class="project-card__tags">
-                                <span class="project-card__tag project-card__tag--platform">Яндекс Игры</span>
-                            </div>
-                            <h3 class="project-card__title">Кради и Лови Обби: Мини-Игры</h3>
-                            <p class="project-card__description">
-                                Участие в разработке проекта MirraGames на Unity.
-                            </p>
-                            <div class="project-card__stack">
-                                <span class="project-card__stack-tag">Unity</span>
-                                <span class="project-card__stack-tag">MirraGames</span>
-                            </div>
-                            <a href="https://yandex.ru/games/app/kradi-i-lovi-obbi-mini-igry-494695" target="_blank" class="project-card__link btn btn-primary">Смотреть проект</a>
-                        </div>
-                    </div>
-
-                    <!-- Scary Shawarma Kiosk — Hidden Miracles Studio -->
-                    <div class="project-card project-card--spotlight animate-on-scroll">
-                        <div class="project-card__placeholder">
-                            <img src="assets/images/shawarma-1.jpg" alt="Заставка игры Scary Shawarma Kiosk" loading="lazy" decoding="async" width="800" height="470">
-                        </div>
-                        <div class="project-card__body">
-                            <div class="project-card__tags">
-                                <span class="project-card__tag project-card__tag--platform">Яндекс Игры</span>
-                            </div>
-                            <h3 class="project-card__title">Scary Shawarma Kiosk</h3>
-                            <p class="project-card__description">
-                                Участие в разработке проекта Hidden Miracles Studio на Unity.
-                            </p>
-                            <div class="project-card__stack">
-                                <span class="project-card__stack-tag">Unity</span>
-                                <span class="project-card__stack-tag">Hidden Miracles Studio</span>
-                            </div>
-                            <a href="https://yandex.ru/games/app/scary-shawarma-kiosk-504555?lang=ru" target="_blank" class="project-card__link btn btn-primary">Смотреть проект</a>
-                        </div>
-                    </div>
-
-                    <!-- 1. Очень странная удача -->
-                    <div class="project-card project-card--fortune animate-on-scroll">
-                        <div class="project-card__placeholder">
-                            <img src="assets/images/strannaya-udacha.png" alt="Заставка игры «Очень странная удача»" loading="lazy" decoding="async" width="2100" height="900">
-                        </div>
-                        <div class="project-card__body">
-                            <div class="project-card__tags">
-                                <span class="project-card__tag project-card__tag--platform">Web</span>
-                            </div>
-                            <h3 class="project-card__title">«Очень странная удача»</h3>
-                            <p class="project-card__description">
-                                Интерактивная игра. Реализована на Unity с интеграцией YandexSDK.
-                            </p>
-                            <div class="project-card__stack">
-                                <span class="project-card__stack-tag">Unity</span>
-                                <span class="project-card__stack-tag">YandexSDK</span>
-                                <span class="project-card__stack-tag">WebGL</span>
-                            </div>
-                            <a href="https://myindie.net/games/game/ochen-strannaya-udacha" target="_blank" class="project-card__link btn btn-primary">Смотреть проект</a>
-                        </div>
-                    </div>
-
-                    <!-- Проекты для Яндекс Игр -->
-                    <div class="project-card project-card--yandex animate-on-scroll">
-                        <a class="project-card__placeholder" href="https://yandex.ru/games/" target="_blank" rel="noopener noreferrer" aria-label="Открыть Яндекс Игры">
-                            <img src="assets/images/yandex-games.png" alt="Официальное изображение платформы Яндекс Игры" loading="lazy" decoding="async" width="1200" height="1200">
-                        </a>
-                        <div class="project-card__body">
-                            <div class="project-card__tags">
-                                <span class="project-card__tag project-card__tag--platform">Web (Яндекс Игры)</span>
-                            </div>
-                            <h3 class="project-card__title">Проекты для Яндекс Игр</h3>
-                            <p class="project-card__description">
-                                Опыт работы с платформой Яндекс Игр, 5+ опубликованных проектов на Unity.
-                            </p>
-                            <div class="project-card__stack">
-                                <span class="project-card__stack-tag">Unity</span>
-                                <span class="project-card__stack-tag">YandexSDK</span>
-                                <span class="project-card__stack-tag">WebGL</span>
-                            </div>
-                            <a href="https://yandex.ru/games/" target="_blank" class="project-card__link btn btn-primary">Открыть платформу</a>
-                        </div>
-                    </div>
-
-                    <!-- Преподавание в Академии TOP -->
-                    <div class="project-card project-card--academy animate-on-scroll">
-                        <div class="project-card__placeholder">
-                            <img src="assets/images/top-academy-hero-1.png" alt="Студенты Академии ТОП на изображении с сайта академии" loading="lazy" decoding="async" width="720" height="675">
-                        </div>
-                        <div class="project-card__body">
-                            <div class="project-card__tags">
-                                <span class="project-card__tag project-card__tag--platform">Офлайн</span>
-                            </div>
-                            <h3 class="project-card__title">Преподавание в Академии TOP</h3>
-                            <p class="project-card__description">
-                                Преподаю в «Академия TOP»: Unity и C#, а также Blender, SketchUp, Tinkercad, Python и другие IT-дисциплины.
-                            </p>
-                            <div class="project-card__stack">
-                                <span class="project-card__stack-tag">C#</span>
-                                <span class="project-card__stack-tag">Unity</span>
-                                <span class="project-card__stack-tag">Методические материалы</span>
-                            </div>
-                            <a href="https://top-academy.ru/" target="_blank" class="project-card__link btn btn-primary">Сайт академии</a>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- ============================================ -->
-        <!-- Video Section (Gameplay)                     -->
-        <!-- ============================================ -->
-        <section id="video" class="section video">
-            <div class="container">
-                <h2 class="section-title animate-on-scroll">Видео с геймплеем</h2>
-                <p class="section-subtitle animate-on-scroll">Несколько проектов в движении</p>
-                <div class="video__grid">
-
-                    <!-- Видео 1: Toy Air Dogs (Rutube) -->
-                    <div class="video__card animate-on-scroll">
-                        <h3 class="video__title">Toy Air Dogs</h3>
-                        <div class="video__embed">
-                            <iframe width="720" height="405" loading="lazy"
-                                src="https://rutube.ru/play/embed/be09c12149055dc80383557c0fa18442"
-                                frameborder="0"
-                                webkitAllowFullScreen
-                                mozallowfullscreen
-                                allowfullscreen
-                                allow="encrypted-media">
-                            </iframe>
-                        </div>
-                    </div>
-
-                    <!-- Видео 2: QR-Clover (JAM / MyIndie January Rush Lvl 8) (Rutube) -->
-                    <div class="video__card animate-on-scroll">
-                        <h3 class="video__title">QR-Clover (MyIndie January Rush Lvl 8)</h3>
-                        <div class="video__embed">
-                            <iframe width="720" height="405" loading="lazy"
-                                src="https://rutube.ru/play/embed/c13c4e42937b3d029f769a682dfbbf28"
-                                frameborder="0"
-                                webkitAllowFullScreen
-                                mozallowfullscreen
-                                allowfullscreen
-                                allow="encrypted-media">
-                            </iframe>
-                        </div>
-                    </div>
-
-                    <!-- Видео 3: QR-FishArena (Rutube) -->
-                    <div class="video__card animate-on-scroll">
-                        <h3 class="video__title">QR-FishArena</h3>
-                        <div class="video__embed">
-                            <iframe width="720" height="405" loading="lazy"
-                                src="https://rutube.ru/play/embed/f94c72b9a376e66cce2437f94bcac69c"
-                                frameborder="0"
-                                webkitAllowFullScreen
-                                mozallowfullscreen
-                                allowfullscreen
-                                allow="encrypted-media">
-                            </iframe>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- ============================================ -->
-        <!-- MapPinner project and code                    -->
-        <!-- ============================================ -->
-        <section id="code" class="section code">
-            <div class="container">
-                <h2 class="section-title animate-on-scroll">MapPinner</h2>
-                <p class="section-subtitle animate-on-scroll">Тестовое задание на Unity, которое я сохранил для демонстрации.</p>
-
-                <div class="code__project animate-on-scroll">
-                    <div class="code__project-image">
-                        <img src="assets/images/map-pinner.png" alt="Карта из проекта MapPinner" loading="lazy" decoding="async" width="627" height="767">
-                    </div>
-                    <div class="code__project-body">
+<div class="code__project-body">
                         <span class="project-card__tag project-card__tag--platform">Unity · WebGL</span>
-                        <h3>Интерактивная карта с метками</h3>
-                        <p>Можно создавать и редактировать метки, прикреплять изображения и аудио. Данные сохраняются локально в браузере.</p>
-                        <div class="project-card__stack">
+<h3>Интерактивная карта с метками</h3>
+<p>Можно создавать и редактировать метки, прикреплять изображения и аудио. Данные сохраняются локально в браузере.</p>
+<div class="project-card__stack">
                             <span class="project-card__stack-tag">Unity</span>
                             <span class="project-card__stack-tag">C#</span>
                             <span class="project-card__stack-tag">WebGL</span>
                         </div>
-                        <div class="project-card__actions">
-                            <button type="button" id="open-map-demo" class="project-card__link btn btn-primary">Запустить MapPinner</button>
-                            <a href="https://github.com/SemenMalyshev/MapPinner" target="_blank" rel="noopener noreferrer" class="project-card__link btn btn-primary">Исходный код ↗</a>
+<div class="project-card__actions">
+<button type="button" id="open-map-demo" class="project-card__link btn btn-primary">Запустить MapPinner</button>
+<a href="https://github.com/SemenMalyshev/MapPinner" target="_blank" rel="noopener noreferrer" class="project-card__link btn btn-primary">Исходный код ↗</a>
                         </div>
                     </div>
                 </div>
-
-                <p class="code__intro animate-on-scroll">Ниже — восемь ключевых файлов: логика карты, сохранение данных и работа с браузером.</p>
-
-                <div class="code__workbench">
-                    <nav class="code__navigator" aria-label="Файлы проекта MapPinner">
-                        <div class="code__navigator-heading">
+<details class="code-details">
+<summary>Посмотреть код и архитектуру</summary>
+<p class="code__intro animate-on-scroll">Ниже — восемь ключевых файлов: логика карты, сохранение данных и работа с браузером.</p>
+<div class="code__workbench">
+<nav class="code__navigator" aria-label="Файлы проекта MapPinner">
+<div class="code__navigator-heading">
                             <span class="code__eyebrow">MAP PINNER / UNITY</span>
-                            <h3>Ключевые файлы</h3>
-                            <p>Актуальный код из репозитория MapPinner</p>
+<h3>Ключевые файлы</h3>
+<p>Актуальный код из репозитория MapPinner</p>
                         </div>
-                        <div class="arch-diagram">
-                            <div class="arch-layer arch-layer--bootstrap">
-                                <div class="arch-layer__label">Bootstrap</div>
-                                <div class="arch-layer__items">
-                                    <button type="button" class="arch-item arch-item--clickable" data-source="UnityProject/Assets/Scripts/Bootstrap/GameInstaller.cs" aria-pressed="true">GameInstaller</button>
+<div class="arch-diagram">
+<div class="arch-layer arch-layer--bootstrap">
+<div class="arch-layer__label">Bootstrap</div>
+<div class="arch-layer__items">
+<button type="button" class="arch-item arch-item--clickable" data-source="UnityProject/Assets/Scripts/Bootstrap/GameInstaller.cs" aria-pressed="true">GameInstaller</button>
                                 </div>
                             </div>
-                            <div class="arch-layer arch-layer--application">
-                                <div class="arch-layer__label">Application</div>
-                                <div class="arch-layer__items">
-                                    <button type="button" class="arch-item arch-item--clickable" data-source="UnityProject/Assets/Scripts/Application/PinInteractionSystem.cs" aria-pressed="false">PinInteractionSystem</button>
+<div class="arch-layer arch-layer--application">
+<div class="arch-layer__label">Application</div>
+<div class="arch-layer__items">
+<button type="button" class="arch-item arch-item--clickable" data-source="UnityProject/Assets/Scripts/Application/PinInteractionSystem.cs" aria-pressed="false">PinInteractionSystem</button>
                                 </div>
                             </div>
-                            <div class="arch-layer arch-layer--domain">
-                                <div class="arch-layer__label">Domain</div>
-                                <div class="arch-layer__items">
-                                    <button type="button" class="arch-item arch-item--clickable" data-source="UnityProject/Assets/Scripts/Domain/MapState.cs" aria-pressed="false">MapState</button>
+<div class="arch-layer arch-layer--domain">
+<div class="arch-layer__label">Domain</div>
+<div class="arch-layer__items">
+<button type="button" class="arch-item arch-item--clickable" data-source="UnityProject/Assets/Scripts/Domain/MapState.cs" aria-pressed="false">MapState</button>
                                 </div>
                             </div>
-                            <div class="arch-layer arch-layer--infrastructure">
-                                <div class="arch-layer__label">Infrastructure</div>
-                                <div class="arch-layer__items">
-                                    <button type="button" class="arch-item arch-item--clickable" data-source="UnityProject/Assets/Scripts/Infrastructure/JsonMapRepository.cs" aria-pressed="false">JsonMapRepository</button>
-                                    <button type="button" class="arch-item arch-item--clickable" data-source="UnityProject/Assets/Scripts/Infrastructure/BrowserMedia.cs" aria-pressed="false">BrowserMedia</button>
-                                    <button type="button" class="arch-item arch-item--clickable" data-source="UnityProject/Assets/Plugins/WebGL/BrowserMedia.jslib" aria-pressed="false">BrowserMedia.jslib</button>
+<div class="arch-layer arch-layer--infrastructure">
+<div class="arch-layer__label">Infrastructure</div>
+<div class="arch-layer__items">
+<button type="button" class="arch-item arch-item--clickable" data-source="UnityProject/Assets/Scripts/Infrastructure/JsonMapRepository.cs" aria-pressed="false">JsonMapRepository</button>
+<button type="button" class="arch-item arch-item--clickable" data-source="UnityProject/Assets/Scripts/Infrastructure/BrowserMedia.cs" aria-pressed="false">BrowserMedia</button>
+<button type="button" class="arch-item arch-item--clickable" data-source="UnityProject/Assets/Plugins/WebGL/BrowserMedia.jslib" aria-pressed="false">BrowserMedia.jslib</button>
                                 </div>
                             </div>
-                            <div class="arch-layer arch-layer--presentation">
-                                <div class="arch-layer__label">Presentation</div>
-                                <div class="arch-layer__items">
-                                    <button type="button" class="arch-item arch-item--clickable" data-source="UnityProject/Assets/Scripts/Presentation/PinView.cs" aria-pressed="false">PinView</button>
-                                    <button type="button" class="arch-item arch-item--clickable" data-source="UnityProject/Assets/Scripts/Presentation/PinEditPanel.cs" aria-pressed="false">PinEditPanel</button>
+<div class="arch-layer arch-layer--presentation">
+<div class="arch-layer__label">Presentation</div>
+<div class="arch-layer__items">
+<button type="button" class="arch-item arch-item--clickable" data-source="UnityProject/Assets/Scripts/Presentation/PinView.cs" aria-pressed="false">PinView</button>
+<button type="button" class="arch-item arch-item--clickable" data-source="UnityProject/Assets/Scripts/Presentation/PinEditPanel.cs" aria-pressed="false">PinEditPanel</button>
                                 </div>
                             </div>
                         </div>
                     </nav>
-
-                    <div class="code__viewer" id="code-viewer" aria-busy="true">
-                        <div class="code__viewer-heading">
-                            <div>
+<div class="code__viewer" id="code-viewer" aria-busy="true">
+<div class="code__viewer-heading">
+<div>
                                 <span class="code__eyebrow" id="code-file-group">Bootstrap / C#</span>
-                                <h3 id="code-file-name">GameInstaller.cs</h3>
+<h3 id="code-file-name">GameInstaller.cs</h3>
                             </div>
-                            <button type="button" class="code__copy" id="copy-code" disabled>Копировать</button>
+<button type="button" class="code__copy" id="copy-code" disabled>Копировать</button>
                         </div>
-                        <p class="code__scroll-hint">Листайте код вбок ↔</p>
-                        <pre class="code__pre"><code id="code-source" class="language-csharp">Загрузка кода…</code></pre>
-                        <div class="code__viewer-footer">
+<p class="code__scroll-hint">Листайте код вбок ↔</p>
+<pre class="code__pre">
+<code id="code-source" class="language-csharp">Загрузка кода…</code></pre>
+<div class="code__viewer-footer">
                             <span>Актуальный код MapPinner</span>
-                            <a href="https://github.com/SemenMalyshev/MapPinner" target="_blank" rel="noopener noreferrer">Репозиторий на GitHub ↗</a>
+<a href="https://github.com/SemenMalyshev/MapPinner" target="_blank" rel="noopener noreferrer">Репозиторий на GitHub ↗</a>
                         </div>
                         <span class="code__status" id="code-status" role="status" aria-live="polite"></span>
                     </div>
                 </div>
+</details>
             </div>
         </section>
-
-        <!-- ============================================ -->
-        <!-- Experience Section                           -->
-        <!-- ============================================ -->
-        <section id="experience" class="section experience">
-            <div class="container">
-                <h2 class="section-title animate-on-scroll">Опыт работы</h2>
-                <p class="section-subtitle animate-on-scroll">Где и над чем я работал</p>
-                <div class="experience__timeline">
-
-                    <!-- 1. Малые игровые студии -->
-                    <div class="timeline__item animate-on-scroll">
-                        <div class="timeline__marker"></div>
-                        <div class="timeline__card">
-                            <h3 class="timeline__title">Unity-разработчик — Малые игровые студии</h3>
-                            <span class="timeline__period">2022 — 2025</span>
-                            <p class="timeline__description">
-                                Разработка игр на Unity для мобильных платформ, веба и ПК. Оптимизация производительности, работа с Asset Bundles/Addressables, интеграция SDK.
-                            </p>
-                            <div class="timeline__tags">
-                                <span class="skill-tag">Unity</span>
-                                <span class="skill-tag">C#</span>
-                                <span class="skill-tag">WebGL</span>
-                                <span class="skill-tag">SDK</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 2. Яндекс Игры -->
-                    <div class="timeline__item animate-on-scroll">
-                        <div class="timeline__marker"></div>
-                        <div class="timeline__card">
-                            <h3 class="timeline__title">Unity-разработчик — Яндекс Игры (фриланс)</h3>
-                            <span class="timeline__period">2024 — 2025</span>
-                            <p class="timeline__description">
-                                Веб
-                            </p>
-                            <div class="timeline__tags">
-                                <span class="skill-tag">YandexSDK</span>
-                                <span class="skill-tag">WebGL</span>
-                                <span class="skill-tag">Unity</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 3. QR-Games.ru -->
-                    <div class="timeline__item animate-on-scroll">
-                        <div class="timeline__marker"></div>
-                        <div class="timeline__card">
-                            <h3 class="timeline__title">Unity-разработчик — QR-Games.ru</h3>
-                            <span class="timeline__period">2025 — настоящее время</span>
-                            <p class="timeline__description">
-                                Игры с необычным управлением. Разработка игр, реализация мультиплеера, настройка сайта и сервера, обслуживание сайта.
-                            </p>
-                            <div class="timeline__tags">
-                                <span class="skill-tag">Unity</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- MirraGames -->
-                    <div class="timeline__item animate-on-scroll">
-                        <div class="timeline__marker"></div>
-                        <div class="timeline__card">
-                            <h3 class="timeline__title">Unity-разработчик — MirraGames</h3>
-                            <span class="timeline__period">Февраль 2026 — Июль 2026 (6 месяцев)</span>
-                            <p class="timeline__description">
-                                Разработка на проектной основе: <a href="https://yandex.ru/games/app/kradi-i-lovi-obbi-mini-igry-494695" target="_blank">«Кради и Лови Обби: Мини-Игры»</a>.
-                            </p>
-                            <div class="timeline__tags">
-                                <span class="skill-tag">Unity</span>
-                                <span class="skill-tag">Яндекс Игры</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Hidden Miracles Studio -->
-                    <div class="timeline__item animate-on-scroll">
-                        <div class="timeline__marker"></div>
-                        <div class="timeline__card">
-                            <h3 class="timeline__title">Unity-разработчик — Hidden Miracles Studio</h3>
-                            <span class="timeline__period">Апрель 2026 — Июнь 2026 (3 месяца)</span>
-                            <p class="timeline__description">
-                                Сотрудничество на проектной основе: <a href="https://yandex.ru/games/app/scary-shawarma-kiosk-504555?lang=ru" target="_blank">Scary Shawarma Kiosk</a>.
-                            </p>
-                            <div class="timeline__tags">
-                                <span class="skill-tag">Unity</span>
-                                <span class="skill-tag">Яндекс Игры</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 4. Академия TOP -->
-                    <div class="timeline__item animate-on-scroll">
-                        <div class="timeline__marker"></div>
-                        <div class="timeline__card">
-                            <h3 class="timeline__title">Преподаватель IT — Академия TOP</h3>
-                            <span class="timeline__period">Март 2026 — настоящее время</span>
-                            <p class="timeline__description">
-                                Преподавание курса по Unity-разработке. Ведение дипломных проектов, подготовка методических материалов.
-                            </p>
-                            <div class="timeline__tags">
-                                <span class="skill-tag">C#</span>
-                                <span class="skill-tag">Unity</span>
-                                <span class="skill-tag">Teaching</span>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- ============================================ -->
-        <!-- Education Section                            -->
-        <!-- ============================================ -->
-        <section id="education" class="section education">
-            <div class="container">
-                <h2 class="section-title animate-on-scroll">Образование</h2>
-                <div class="experience__timeline">
-                    <div class="timeline__item animate-on-scroll">
-                        <div class="timeline__marker"></div>
-                        <div class="timeline__card">
-                            <h3 class="timeline__title">Интеграции — Академия «ТОП»</h3>
-                            <ul class="education__directions">
-                                <li>Преподаватель Малой Компьютерной Академии</li>
-                                <li>Первый Шаг</li>
-                                <li>Повышение квалификации «Школа Преподавателей 3.0» · 2026 г.</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="timeline__item animate-on-scroll">
-                        <div class="timeline__marker"></div>
-                        <div class="timeline__card">
-                            <h3 class="timeline__title">Юриспруденция — Краснодарский университет Министерства внутренних дел Российской Федерации, Краснодар</h3>
-                            <span class="timeline__period">2022 г.</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============================================ -->
-        <!-- Contact Section                              -->
-        <!-- ============================================ -->
-        <section id="contact" class="section contact">
-            <div class="container">
-                <h2 class="section-title animate-on-scroll">Контакты</h2>
-                <p class="section-subtitle animate-on-scroll">Есть проект или идея? Напишите — обсудим.</p>
-                <div class="contact__grid">
-
-                    <!-- Левая колонка: контактная информация -->
-                    <div class="contact__info animate-on-scroll">
-                        <div class="contact__item">
-                            <span class="contact__icon">📧</span>
-                            <a href="mailto:d3veloperg@yandex.ru" class="contact__link">d3veloperg@yandex.ru</a>
-                        </div>
-                        <div class="contact__item">
-                            <span class="contact__icon">📞</span>
-                            <a href="tel:+79155728178" class="contact__link">8-915-572-81-78</a>
-                        </div>
-                        <div class="contact__item">
-                            <span class="contact__icon">💬</span>
-                            <a href="https://t.me/d3veloperg" target="_blank" class="contact__link">@d3veloperg</a>
-                        </div>
-                        <div class="contact__item">
-                            <span class="contact__icon">💻</span>
-                            <a href="https://github.com/SemenMalyshev" target="_blank" class="contact__link">github.com/SemenMalyshev</a>
-                        </div>
-                        <div class="contact__item">
-                            <span class="contact__icon">📺</span>
-                            <a href="https://rutube.ru/channel/78499030" target="_blank" class="contact__link">Rutube-канал</a>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-        </section>
-
+<section id="skills" class="section skills">
+<div class="container">
+<h2 class="section-title animate-on-scroll">Навыки</h2>
+<div id="about" class="profile-intro">
+<p><strong>Проектная разработка с 2022 года.</strong> Работаю с новыми и существующими Unity-проектами: реализую механики, исправляю ошибки, переношу игры на WebGL и подготавливаю сборки к выпуску. Есть опыт совместной разработки с разделением ответственности за механики.</p></div>
+<div class="skills__grid">
+<div class="skill-category animate-on-scroll">
+<div class="skill-category__header"><span class="skill-category__icon" aria-hidden="true">🎮</span>
+<h3 class="skill-category__title">Unity & C#</h3></div>
+<div class="skill-category__tags"><span class="skill-tag">C# / LINQ / async-await</span><span class="skill-tag">DI</span><span class="skill-tag">Unity UI / uGUI</span><span class="skill-tag">Addressables / Asset Bundles</span><span class="skill-tag">DOTween</span><span class="skill-tag">ECS (Entities)</span></div></div>
+<div class="skill-category animate-on-scroll">
+<div class="skill-category__header"><span class="skill-category__icon" aria-hidden="true">📦</span>
+<h3 class="skill-category__title">Сборки и интеграции</h3></div>
+<div class="skill-category__tags"><span class="skill-tag">WebGL / Mobile / PC</span><span class="skill-tag">YandexSDK</span><span class="skill-tag">MirraSDK</span><span class="skill-tag">Playgamma SDK</span><span class="skill-tag">Оптимизация сборок</span></div></div>
+<div class="skill-category animate-on-scroll">
+<div class="skill-category__header"><span class="skill-category__icon" aria-hidden="true">🌐</span>
+<h3 class="skill-category__title">Web</h3></div>
+<div class="skill-category__tags"><span class="skill-tag">JavaScript / TypeScript — базовый</span><span class="skill-tag">HTML / CSS</span><span class="skill-tag">REST API</span><span class="skill-tag">WebSocket</span></div></div>
+<div class="skill-category animate-on-scroll">
+<div class="skill-category__header"><span class="skill-category__icon" aria-hidden="true">🛠</span>
+<h3 class="skill-category__title">Инструменты</h3></div>
+<div class="skill-category__tags"><span class="skill-tag">Git / GitHub / Git Flow</span><span class="skill-tag">Visual Studio / VS Code</span><span class="skill-tag">ИИ-ассистенты и агентные инструменты</span></div></div>
+        </div>
+<details class="case-details" style="margin-top:24px">
+<summary>Дополнительные инструменты</summary>
+<div class="case-details__body">
+<div class="skill-category__tags"><span class="skill-tag">Figma</span><span class="skill-tag">Photoshop</span><span class="skill-tag">Blender</span><span class="skill-tag">Aseprite</span><span class="skill-tag">Python — базовый</span><span class="skill-tag">Telegram-боты на C# / .NET</span><span class="skill-tag">Адаптивная вёрстка</span></div></div></details>
+    </div></section>
+<section id="experience" class="section experience">
+<div class="container">
+<h2 class="section-title animate-on-scroll">Опыт</h2>
+<p class="section-subtitle">Проектная разработка, собственные игры и преподавание.</p>
+<div class="experience__timeline">
+<div class="timeline__item animate-on-scroll">
+<div class="timeline__marker"></div>
+<div class="timeline__card">
+<h3 class="timeline__title">Разработчик — QR-Games</h3><span class="timeline__period">2025 — настоящее время</span>
+<p class="timeline__description">Самостоятельная разработка игр на Unity и их выпуск на платформе. Работа над мультиплеером, веб-платформой, сайтом и сервером.</p>
+<div class="timeline__tags"><span class="skill-tag">Unity</span><span class="skill-tag">C#</span><span class="skill-tag">WebGL</span><span class="skill-tag">WebSocket</span></div></div></div>
+<div class="timeline__item animate-on-scroll">
+<div class="timeline__marker"></div>
+<div class="timeline__card">
+<h3 class="timeline__title">Unity Developer — MirraGames</h3><span class="timeline__period">Февраль — июль 2026 · проектное сотрудничество</span>
+<p class="timeline__description">Оплачиваемая проектная работа над <a href="https://yandex.ru/games/app/kradi-i-lovi-obbi-mini-igry-494695" target="_blank" rel="noopener noreferrer" class="">«Кради и Лови Обби: Мини-Игры» <span aria-hidden="true">↗</span></a>.</p>
+<div class="timeline__tags"><span class="skill-tag">Unity</span><span class="skill-tag">WebGL</span></div></div></div>
+<div class="timeline__item animate-on-scroll">
+<div class="timeline__marker"></div>
+<div class="timeline__card">
+<h3 class="timeline__title">Unity Developer — Hidden Miracles Studio</h3><span class="timeline__period">Апрель — июнь 2026 · проектное сотрудничество</span>
+<p class="timeline__description">Оплачиваемая проектная работа над <a href="https://yandex.ru/games/app/scary-shawarma-kiosk-504555?lang=ru" target="_blank" rel="noopener noreferrer" class="">Scary Shawarma Kiosk <span aria-hidden="true">↗</span></a>.</p>
+<div class="timeline__tags"><span class="skill-tag">Unity</span><span class="skill-tag">WebGL</span></div></div></div>
+<div class="timeline__item animate-on-scroll">
+<div class="timeline__marker"></div>
+<div class="timeline__card">
+<h3 class="timeline__title">Проектная разработка на Unity</h3><span class="timeline__period">2022 — 2025</span>
+<p class="timeline__description">Отдельные оплачиваемые задачи для небольших игровых студий: разработка и доработка Unity-проектов, оптимизация, работа с ресурсами и интеграция SDK.</p>
+<div class="timeline__tags"><span class="skill-tag">Unity</span><span class="skill-tag">C#</span><span class="skill-tag">Addressables</span><span class="skill-tag">SDK</span></div></div></div>
+<div class="timeline__item animate-on-scroll">
+<div class="timeline__marker"></div>
+<div class="timeline__card">
+<h3 class="timeline__title">Публикация игр на Яндекс Играх</h3><span class="timeline__period">2024 — 2025</span>
+<p class="timeline__description">Работа с браузерными сборками Unity, интеграцией YandexSDK и публикацией игр на платформе.</p>
+<div class="timeline__tags"><span class="skill-tag">Unity</span><span class="skill-tag">YandexSDK</span><span class="skill-tag">WebGL</span></div></div></div>
+<div class="timeline__item animate-on-scroll">
+<div class="timeline__marker"></div>
+<div class="timeline__card">
+<h3 class="timeline__title">Преподаватель IT — Академия TOP</h3><span class="timeline__period">Март 2026 — настоящее время</span>
+<p class="timeline__description">Обучаю как новичков, так и опытных разработчиков базовым и продвинутым навыкам разработки. Преподаю Unity и C#, веду дипломные проекты и готовлю учебные материалы. Также преподаю Blender, SketchUp, Tinkercad, Python и другие IT-дисциплины.</p>
+<div class="timeline__tags"><span class="skill-tag">Unity</span><span class="skill-tag">C#</span><span class="skill-tag">Учебные материалы</span></div></div></div></div></div></section>
+<section id="education" class="section education">
+<div class="container">
+<h2 class="section-title animate-on-scroll">Образование</h2>
+<div class="experience__timeline">
+<div class="timeline__item animate-on-scroll">
+<div class="timeline__marker"></div>
+<div class="timeline__card">
+<h3 class="timeline__title">Юриспруденция</h3><span class="timeline__period">2022</span>
+<p class="timeline__description">Краснодарский университет Министерства внутренних дел Российской Федерации, Краснодар.</p>
+<div class="timeline__tags"></div></div></div>
+<div class="timeline__item animate-on-scroll">
+<div class="timeline__marker"></div>
+<div class="timeline__card">
+<h3 class="timeline__title">Академия TOP · повышение квалификации</h3><span class="timeline__period">2026</span>
+<p class="timeline__description">«Школа Преподавателей 3.0». Работа с программами Малой Компьютерной Академии и «Первый Шаг».</p>
+<div class="timeline__tags"></div></div></div></div></div></section>
+<section id="contact" class="section contact">
+<div class="container">
+<h2 class="section-title animate-on-scroll">Давайте обсудим работу</h2>
+<p class="section-subtitle">Рассматриваю предложения по разработке. Удалённо или в офисе в Санкт-Петербурге — напишите, чтобы обсудить задачи и формат.</p>
+<div class="contact__grid">
+<div class="contact__info">
+<div class="contact__item"><span class="contact__icon" aria-hidden="true">📧</span>
+<a href="mailto:d3veloperg@yandex.ru" class="contact__link">d3veloperg@yandex.ru</a></div>
+<div class="contact__item"><span class="contact__icon" aria-hidden="true">💬</span>
+<a href="https://t.me/d3veloperg" class="contact__link" target="_blank" rel="noopener noreferrer">@d3veloperg</a></div>
+<div class="contact__item"><span class="contact__icon" aria-hidden="true">📞</span>
+<a href="tel:+79155728178" class="contact__link">+7 915 572-81-78</a></div>
+<div class="contact__item"><span class="contact__icon" aria-hidden="true">💻</span>
+<a href="https://github.com/SemenMalyshev" class="contact__link" target="_blank" rel="noopener noreferrer">github.com/SemenMalyshev</a></div>
+<div class="contact__item"><span class="contact__icon" aria-hidden="true">📺</span>
+<a href="https://rutube.ru/channel/78499030" class="contact__link" target="_blank" rel="noopener noreferrer">Rutube-канал</a></div></div></div></div></section>
     </main>
-
-    <dialog id="map-demo" class="map-demo" aria-labelledby="map-demo-title">
-        <div class="map-demo__header">
-            <div>
-                <h2 id="map-demo-title">MapPinner</h2>
-                <p>Тестовый проект на Unity · данные сохраняются в вашем браузере</p>
+<dialog id="map-demo" class="map-demo" aria-labelledby="map-demo-title">
+<div class="map-demo__header">
+<div>
+<h2 id="map-demo-title">MapPinner</h2>
+<p>Тестовый проект на Unity · данные сохраняются в вашем браузере</p>
             </div>
-            <button type="button" id="close-map-demo" class="map-demo__close" aria-label="Закрыть MapPinner">×</button>
+<button type="button" id="close-map-demo" class="map-demo__close" aria-label="Закрыть MapPinner">×</button>
         </div>
-        <div class="map-demo__stage">
-            <canvas id="map-demo-canvas" width="960" height="600" tabindex="0" aria-label="Интерактивная карта MapPinner"></canvas>
-            <div id="map-demo-status" class="map-demo__status" role="status" aria-live="polite">Подготовка демо…</div>
+<div class="map-demo__stage">
+<canvas id="map-demo-canvas" width="960" height="600" tabindex="0" aria-label="Интерактивная карта MapPinner"></canvas>
+<div id="map-demo-status" class="map-demo__status" role="status" aria-live="polite">Подготовка демо…</div>
         </div>
-        <p class="map-demo__hint">Мышь: клик — метка, удержание — перемещение метки, правая кнопка — карта, колесо — масштаб. Телефон: касание — метка, удержание — перемещение, жесты — карта и масштаб.</p>
+<p class="map-demo__hint">Мышь: клик — метка, удержание — перемещение метки, правая кнопка — карта, колесо — масштаб. Телефон: касание — метка, удержание — перемещение, жесты — карта и масштаб.</p>
     </dialog>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container footer__inner">
-            <span>Семён Малышев · Unity-разработчик</span>
-            <a href="#hero">Наверх ↑</a>
-        </div>
-    </footer>
-
-    <!-- Scroll to Top Button -->
-    <button class="scroll-top" id="scrollTop" aria-label="Наверх">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 15l-6-6-6 6"/>
-        </svg>
-    </button>
-
-    <!-- Scripts -->
-    <script src="js/main.js" type="module"></script>
-    <script src="js/animations.js" type="module"></script>
-    <script src="js/map-demo.js" type="module"></script>
-</body>
-</html>
+<footer class="footer">
+<div class="container footer__inner"><span>Семён Малышев · Unity-разработчик</span>
+<a href="#hero">Наверх ↑</a></div></footer>
+<button type="button" class="scroll-top" id="scrollTop" aria-label="Наверх">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M18 15l-6-6-6 6"/></svg></button>
+<script src="js/main.js" type="module"></script>
+<script src="js/animations.js" type="module"></script>
+<script src="js/map-demo.js" type="module"></script>
+</body></html>

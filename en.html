@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Semen Malyshev — Unity developer. C#, WebGL, gameplay, multiplayer and released games. Project case studies and source code.">
+<meta name="keywords" content="Unity, C#, WebGL, developer, portfolio, games">
+<script src="js/language.js"></script>
+<script>
+        document.documentElement.classList.add('js');
+        try {
+            document.documentElement.dataset.theme = localStorage.getItem('theme') ||
+                (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        } catch {
+            document.documentElement.dataset.theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+    </script>
+<!-- Preconnect для внешних CDN -->
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<!-- Highlight.js -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" defer></script>
+<!-- Critical CSS: встроен в head для мгновенного рендеринга -->
+<style>
+        /* ----- CSS Variables ----- */
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #111118;
+            --bg-card: #1a1a24;
+            --text-primary: #f0f0f5;
+            --text-secondary: #a0a0b0;
+            --accent: #6366f1;
+            --accent-hover: #818cf8;
+            --accent-gradient: linear-gradient(135deg, #6366f1, #4facfe);
+            --border: #2a2a3a;
+            --font-main: 'Inter', sans-serif;
+            --font-code: 'JetBrains Mono', monospace;
+            --max-width: 1200px;
+            --radius: 12px;
+            --transition: 0.3s ease;
+        }
+        [data-theme="light"] {
+            --bg-primary: #f8f9fa;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --text-primary: #1a1a2e;
+            --text-secondary: #6b7280;
+            --border: #e5e7eb;
+        }
+        /* ----- Reset & Base ----- */
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+        body{font-family:'Inter',sans-serif;font-size:16px;line-height:1.6;color:var(--text-primary);background:var(--bg-primary);min-height:100vh}
+        body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(99,102,241,0.04)1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,0.04)1px,transparent 1px);background-size:40px 40px;mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,black 20%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,black 20%,transparent 70%)}
+        ::selection{background:var(--accent);color:#fff}
+        a{color:var(--accent);text-decoration:none}
+        img{max-width:100%;height:auto;display:block}
+        ul,ol{list-style:none}
+        /* ----- Container ----- */
+        .container{max-width:1200px;margin:0 auto;padding:0 20px}
+        .section{padding:64px 20px}
+        /* ----- Section Title / Subtitle ----- */
+        .section-title{font-size:2.5rem;font-weight:700;text-align:center;margin-bottom:16px}
+        .section-title::after{content:'';display:block;width:60px;height:4px;border-radius:2px;background:linear-gradient(135deg,#6366f1,#4facfe);margin:12px auto 0}
+        .section-subtitle{font-size:1.1rem;color:var(--text-secondary);text-align:center;margin-bottom:48px;max-width:600px;margin-left:auto;margin-right:auto}
+        .gradient-text{background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        /* ----- Buttons ----- */
+        .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 28px;font-family:'Inter',sans-serif;font-size:1rem;font-weight:500;border-radius:12px;cursor:pointer;border:2px solid transparent;text-decoration:none}
+        .btn-primary{background:var(--accent-gradient);color:#fff;border-color:transparent}
+        .btn-secondary{background:transparent;color:var(--text-primary);border-color:var(--border)}
+        /* ----- Header ----- */
+        .header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,15,0.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+        .header__inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+        .logo{font-size:1.5rem;font-weight:700;text-decoration:none;color:var(--text-primary)}
+        .nav__list{display:flex;gap:32px}
+        .nav__link{color:var(--text-secondary);font-size:0.95rem;font-weight:500;position:relative}
+        .header__actions{display:flex;align-items:center;gap:8px}
+        .theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;font-size:1.25rem;background:var(--bg-card);border:1px solid var(--border);border-radius:50%;cursor:pointer;padding:0}
+        /* ----- Hero ----- */
+        .hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding-top:80px;overflow:hidden}
+        .hero__inner{position:relative;z-index:1}
+        .hero__greeting{font-size:1.25rem;color:var(--text-secondary);margin-bottom:12px}
+        .hero__name{font-weight:700;color:var(--text-primary)}
+        .hero__title{font-size:clamp(2.5rem,6vw,4rem);font-weight:800;margin-bottom:20px;line-height:1.15;letter-spacing:-0.5px}
+        .hero__subtitle{font-size:1.15rem;color:var(--text-secondary);margin-bottom:40px;max-width:600px;margin-left:auto;margin-right:auto;line-height:1.7}
+        .hero__actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+        /* ----- Scroll Animations ----- */
+        .animate-on-scroll{opacity:0;will-change:transform,opacity}
+        .animate-on-scroll:not([data-animation]){transform:translateY(30px)}
+        .animate-on-scroll.visible{opacity:1!important;transform:translateY(0)translateX(0)scale(1)!important}
+        /* ----- Nav Toggle (скрыт на десктопе) ----- */
+        .nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+        .nav-toggle span{display:block;width:24px;height:2px;background:var(--text-primary);border-radius:2px}
+    </style>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/design.css">
+<link rel="stylesheet" href="css/game.css">
+<!-- Favicon (emoji fallback) -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
+<text y='.9em' font-size='90'>🎮</text></svg>">
+<title>Semen Malyshev — Unity Developer</title>
+<link rel="canonical" href="https://d3veloperg.ru/en.html">
+<link rel="alternate" hreflang="ru" href="https://d3veloperg.ru/?lang=ru">
+<link rel="alternate" hreflang="en" href="https://d3veloperg.ru/en.html">
+<link rel="alternate" hreflang="x-default" href="https://d3veloperg.ru/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Semen Malyshev — Unity Developer">
+<meta property="og:description" content="Semen Malyshev — Unity developer. C#, WebGL, gameplay, multiplayer and released games. Project case studies and source code.">
+<meta property="og:url" content="https://d3veloperg.ru/en.html">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://d3veloperg.ru/assets/images/qr-fish-arena.png">
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+<header class="header" id="header">
+<div class="container header__inner">
+<a href="#hero" class="logo gradient-text">d3veloperg</a>
+<nav class="nav" id="nav" aria-label="Main navigation">
+<ul class="nav__list">
+<li>
+<a href="#projects" class="nav__link">Projects</a></li>
+<li>
+<a href="#code" class="nav__link">MapPinner</a></li>
+<li>
+<a href="#skills" class="nav__link">Skills</a></li>
+<li>
+<a href="#experience" class="nav__link">Experience</a></li>
+<li>
+<a href="#contact" class="nav__link">Contact</a></li></ul></nav>
+<div class="header__actions">
+<nav class="language-switch" aria-label="Site language">
+<a href="./?lang=ru" data-language="ru" lang="ru" hreflang="ru" aria-label="Русский">RU</a>
+<a href="en.html" data-language="en" lang="en" hreflang="en" aria-label="English" aria-current="page">EN</a></nav>
+<button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle color theme">☀️</button>
+<button type="button" class="nav-toggle" id="navToggle" aria-label="Menu" aria-controls="nav" aria-expanded="false"><span></span><span></span><span></span></button>
+        </div>
+    </div></header>
+<main id="main">
+<section id="hero" class="section hero">
+<div class="container hero__inner">
+<div class="hero__copy">
+<p class="hero__greeting animate-on-scroll">Unity Developer · C# · WebGL</p>
+<h1 class="hero__title animate-on-scroll">Semen<br><span>Malyshev</span></h1>
+<p class="hero__subtitle animate-on-scroll">I build Unity games, gameplay mechanics and multiplayer interactions. I port projects to WebGL, optimize builds and take games through to release.</p>
+<p class="hero__availability animate-on-scroll">Open to remote roles and office work in St Petersburg.</p>
+<div class="hero__actions animate-on-scroll">
+<a href="#projects" class="btn btn-primary">View projects <span aria-hidden="true">↗</span></a>
+<a href="#contact" class="btn btn-secondary">Get in touch</a></div>
+        </div>
+<div class="hero__portrait animate-on-scroll">
+<img src="assets/images/MyPhoto.jpg" alt="Semen Malyshev" width="600" height="713" fetchpriority="high"><span class="hero__portrait-caption">Semen Malyshev<span> / Unity Developer</span></span></div>
+    </div></section>
+<section id="projects" class="section projects">
+<div class="container">
+<h2 class="section-title animate-on-scroll">Projects</h2>
+<p class="section-subtitle animate-on-scroll">Released games, project work and what I contributed.</p>
+<article class="qr-case" aria-labelledby="qr-title">
+<div class="project-card project-card--featured">
+<div class="project-card__placeholder">
+<img src="assets/images/qr-fish-fire.webp" alt="Fish Fire, a QR-Games title" loading="lazy" decoding="async" width="720" height="720"></div>
+<div class="project-card__body"><span class="case-eyebrow">Featured case · original games</span>
+<h3 id="qr-title" class="project-card__title">QR-Games</h3>
+<p class="project-card__description">Party games on a shared screen, with phones as controllers. My work spans Unity gameplay, the browser platform and game releases.</p>
+<div class="project-card__stack"><span class="project-card__stack-tag">Unity</span><span class="project-card__stack-tag">C#</span><span class="project-card__stack-tag">WebGL</span><span class="project-card__stack-tag">WebSocket</span></div>
+<a href="https://qrgames.fun/" target="_blank" rel="noopener noreferrer" class="project-card__link btn btn-primary">Visit the platform <span aria-hidden="true">↗</span></a>
+                </div>
+            </div>
+<div class="qr-case__content">
+<h3 class="case-heading">My contribution</h3>
+<div class="case-role-grid">
+<div class="case-role">
+<h4>Unity games</h4>
+<p>I developed every game in the current catalog and took each to release, including gameplay, phone controls and multiplayer interactions.</p></div>
+<div class="case-role">
+<h4>Web platform</h4>
+<p>I handled most of the website and server work and integrated the games with the platform. Parts of the web implementation were developed with AI assistance.</p></div>
+<div class="case-role">
+<h4>Release and maintenance</h4>
+<p>I prepared WebGL builds, deployed the games and configured the website and server. I continue to maintain the games and platform after release.</p></div>
+                </div>
+<h3 class="case-heading">Released games</h3>
+<div class="game-catalog">
+<article class="game-tile">
+<img src="assets/images/qr-mini-golf.webp" alt="MiniGolf Gyro" width="720" height="450" loading="lazy" decoding="async">
+<div class="game-tile__body">
+<h4>MiniGolf Gyro</h4>
+<p>Mini golf controlled with the phone’s gyroscope.</p>
+<a href="https://qrgames.fun/games/5" target="_blank" rel="noopener noreferrer" class="game-tile__link">View game <span aria-hidden="true">↗</span></a></div></article>
+<article class="game-tile">
+<img src="assets/images/qr-air-battle.webp" alt="Air Battle" width="720" height="450" loading="lazy" decoding="async">
+<div class="game-tile__body">
+<h4>Air Battle</h4>
+<p>Aerial battles controlled from a phone.</p>
+<a href="https://qrgames.fun/games/4" target="_blank" rel="noopener noreferrer" class="game-tile__link">View game <span aria-hidden="true">↗</span></a></div></article>
+<article class="game-tile">
+<img src="assets/images/qr-fish-fire.webp" alt="Fish Fire" width="720" height="450" loading="lazy" decoding="async">
+<div class="game-tile__body">
+<h4>Fish Fire</h4>
+<p>A multiplayer 2D fish shooter.</p>
+<a href="https://qrgames.fun/games/3" target="_blank" rel="noopener noreferrer" class="game-tile__link">View game <span aria-hidden="true">↗</span></a></div></article>
+<article class="game-tile">
+<img src="assets/images/qr-football.webp" alt="Football Rumble" width="720" height="450" loading="lazy" decoding="async">
+<div class="game-tile__body">
+<h4>Football Rumble</h4>
+<p>Arcade football for a group on a shared screen.</p>
+<a href="https://qrgames.fun/games/1" target="_blank" rel="noopener noreferrer" class="game-tile__link">View game <span aria-hidden="true">↗</span></a></div></article>
+<article class="game-tile">
+<img src="assets/images/qr-brawl-slash.webp" alt="Brawl Slash" width="720" height="450" loading="lazy" decoding="async">
+<div class="game-tile__body">
+<h4>Brawl Slash</h4>
+<p>2D battles with phones as controllers.</p>
+<a href="https://qrgames.fun/games/2" target="_blank" rel="noopener noreferrer" class="game-tile__link">View game <span aria-hidden="true">↗</span></a></div></article></div>
+<details class="case-details">
+<summary>How the project works</summary>
+<div class="case-details__body">
+<p class="case-note">The games and the web platform are separate parts of the project, with different technology stacks.</p>
+<div class="case-stack"><span class="project-card__stack-tag">Unity / C#</span><span class="project-card__stack-tag">SvelteKit / TypeScript</span><span class="project-card__stack-tag">Node.js</span><span class="project-card__stack-tag">HTTP / WebSocket / WSS</span><span class="project-card__stack-tag">PostgreSQL / Drizzle</span></div>
+<ol class="case-flow">
+<li><strong>Shared screen</strong>
+<p>Unity WebGL runs the game in the browser. Gameplay logic and mechanics live in the Unity projects.</p></li>
+<li><strong>Players’ phones</strong>
+<p>Browser-based controllers send player input; WebSocket connects participants to the shared game.</p></li>
+<li><strong>Web platform and server</strong>
+<p>SvelteKit and Node.js serve pages, HTTP APIs and WebSocket connections. nginx handles HTTPS/WSS.</p></li>
+<li><strong>Platform data</strong>
+<p>PostgreSQL and Drizzle store user and session data. Games are published as separate WebGL builds.</p></li>
+                    </ol>
+<p class="case-note">The result is a released game catalog and a shared platform for launching games and connecting players.</p>
+                </div></details>
+<div class="case-videos">
+<h3 class="case-heading">Gameplay</h3>
+<div class="video__grid">
+<div class="video__card">
+<h4 class="video__title">ToyAirDogs</h4>
+<div class="video__embed">
+<iframe width="720" height="405" loading="lazy" src="https://rutube.ru/play/embed/be09c12149055dc80383557c0fa18442" title="Gameplay: ToyAirDogs" allowfullscreen allow="encrypted-media"></iframe></div><a class="video__watch" href="https://rutube.ru/video/be09c12149055dc80383557c0fa18442/" target="_blank" rel="noopener noreferrer">Watch on Rutube ↗</a></div>
+<div class="video__card">
+<h4 class="video__title">QR-FishArena</h4>
+<div class="video__embed">
+<iframe width="720" height="405" loading="lazy" src="https://rutube.ru/play/embed/f94c72b9a376e66cce2437f94bcac69c" title="Gameplay: QR-FishArena" allowfullscreen allow="encrypted-media"></iframe></div><a class="video__watch" href="https://rutube.ru/video/f94c72b9a376e66cce2437f94bcac69c/" target="_blank" rel="noopener noreferrer">Watch on Rutube ↗</a></div>
+                </div></div>
+            </div>
+        </article>
+<h3 class="case-heading">Other projects</h3>
+<div class="projects__grid projects__grid--supporting">
+<article class="project-card animate-on-scroll">
+<div class="project-card__placeholder">
+<img src="assets/images/obbi-1.jpg" alt="Steal and Catch Obby: Mini-Games" width="800" height="470" loading="lazy" decoding="async"></div>
+<div class="project-card__body">
+<div class="project-card__tags"><span class="project-card__tag project-card__tag--platform">Yandex Games</span></div>
+<h4 class="project-card__title">Steal and Catch Obby: Mini-Games</h4>
+<p class="project-card__description">Project-based Unity development for MirraGames on a game published on Yandex Games.</p>
+<div class="project-card__stack"><span class="project-card__stack-tag">Unity</span><span class="project-card__stack-tag">WebGL</span><span class="project-card__stack-tag">MirraGames</span></div>
+<a href="https://yandex.ru/games/app/kradi-i-lovi-obbi-mini-igry-494695" target="_blank" rel="noopener noreferrer" class="project-card__link">View project <span aria-hidden="true">↗</span></a></div></article>
+<article class="project-card animate-on-scroll">
+<div class="project-card__placeholder">
+<img src="assets/images/shawarma-1.jpg" alt="Scary Shawarma Kiosk" width="800" height="470" loading="lazy" decoding="async"></div>
+<div class="project-card__body">
+<div class="project-card__tags"><span class="project-card__tag project-card__tag--platform">Yandex Games</span></div>
+<h4 class="project-card__title">Scary Shawarma Kiosk</h4>
+<p class="project-card__description">Project-based collaboration with Hidden Miracles Studio on a released Unity game.</p>
+<div class="project-card__stack"><span class="project-card__stack-tag">Unity</span><span class="project-card__stack-tag">WebGL</span><span class="project-card__stack-tag">Hidden Miracles</span></div>
+<a href="https://yandex.ru/games/app/scary-shawarma-kiosk-504555?lang=ru" target="_blank" rel="noopener noreferrer" class="project-card__link">View project <span aria-hidden="true">↗</span></a></div></article>
+<article class="project-card animate-on-scroll">
+<div class="project-card__placeholder">
+<img src="assets/images/strannaya-udacha.png" alt="Very Strange Luck" width="800" height="470" loading="lazy" decoding="async"></div>
+<div class="project-card__body">
+<div class="project-card__tags"><span class="project-card__tag project-card__tag--platform">MyIndie · Game jam</span></div>
+<h4 class="project-card__title">Very Strange Luck</h4>
+<p class="project-card__description">A team Unity project for MyIndie January Rush Lvl 8. My role was developer. The gameplay recording uses the working title QR-Clover.</p>
+<div class="project-card__stack"><span class="project-card__stack-tag">Unity</span><span class="project-card__stack-tag">Windows</span><span class="project-card__stack-tag">Game jam</span></div>
+<a href="https://myindie.net/games/game/ochen-strannaya-udacha" target="_blank" rel="noopener noreferrer" class="project-card__link">View project <span aria-hidden="true">↗</span></a>
+<details class="project-video">
+<summary>Gameplay: QR-Clover</summary>
+<div class="video__embed">
+<iframe width="720" height="405" loading="lazy" src="https://rutube.ru/play/embed/c13c4e42937b3d029f769a682dfbbf28" title="Gameplay: Very Strange Luck / QR-Clover" allowfullscreen allow="encrypted-media"></iframe></div><a class="video__watch" href="https://rutube.ru/video/c13c4e42937b3d029f769a682dfbbf28/" target="_blank" rel="noopener noreferrer">Watch on Rutube ↗</a></details></div></article></div></div></section>
+<section id="code" class="section code">
+<div class="container">
+<h2 class="section-title animate-on-scroll">MapPinner</h2>
+<p class="section-subtitle animate-on-scroll">A Unity test assignment kept as a working demo and code sample.</p>
+<div class="code__project animate-on-scroll">
+<div class="code__project-image">
+<img src="assets/images/map-pinner.png" alt="The map in MapPinner" loading="lazy" decoding="async" width="627" height="767">
+                    </div>
+<div class="code__project-body">
+                        <span class="project-card__tag project-card__tag--platform">Unity · WebGL</span>
+<h3>Interactive map with pins</h3>
+<p>Create and edit pins and attach images or audio. Data is stored locally in the browser.</p>
+<div class="project-card__stack">
+                            <span class="project-card__stack-tag">Unity</span>
+                            <span class="project-card__stack-tag">C#</span>
+                            <span class="project-card__stack-tag">WebGL</span>
+                        </div>
+<div class="project-card__actions">
+<button type="button" id="open-map-demo" class="project-card__link btn btn-primary">Launch MapPinner</button>
+<a href="https://github.com/SemenMalyshev/MapPinner" target="_blank" rel="noopener noreferrer" class="project-card__link btn btn-primary">Source code ↗</a>
+                        </div>
+                    </div>
+                </div>
+<details class="code-details">
+<summary>Explore source and architecture</summary>
+<p class="code__intro animate-on-scroll">Eight key files cover map logic, persistence and browser integration.</p>
+<div class="code__workbench">
+<nav class="code__navigator" aria-label="MapPinner project files">
+<div class="code__navigator-heading">
+                            <span class="code__eyebrow">MAP PINNER / UNITY</span>
+<h3>Key files</h3>
+<p>Current source from the MapPinner repository</p>
+                        </div>
+<div class="arch-diagram">
+<div class="arch-layer arch-layer--bootstrap">
+<div class="arch-layer__label">Bootstrap</div>
+<div class="arch-layer__items">
+<button type="button" class="arch-item arch-item--clickable" data-source="UnityProject/Assets/Scripts/Bootstrap/GameInstaller.cs" aria-pressed="true">GameInstaller</button>
+                                </div>
+                            </div>
+<div class="arch-layer arch-layer--application">
+<div class="arch-layer__label">Application</div>
+<div class="arch-layer__items">
+<button type="button" class="arch-item arch-item--clickable" data-source="UnityProject/Assets/Scripts/Application/PinInteractionSystem.cs" aria-pressed="false">PinInteractionSystem</button>
+                                </div>
+                            </div>
+<div class="arch-layer arch-layer--domain">
+<div class="arch-layer__label">Domain</div>
+<div class="arch-layer__items">
+<button type="button" class="arch-item arch-item--clickable" data-source="UnityProject/Assets/Scripts/Domain/MapState.cs" aria-pressed="false">MapState</button>
+                                </div>
+                            </div>
+<div class="arch-layer arch-layer--infrastructure">
+<div class="arch-layer__label">Infrastructure</div>
+<div class="arch-layer__items">
+<button type="button" class="arch-item arch-item--clickable" data-source="UnityProject/Assets/Scripts/Infrastructure/JsonMapRepository.cs" aria-pressed="false">JsonMapRepository</button>
+<button type="button" class="arch-item arch-item--clickable" data-source="UnityProject/Assets/Scripts/Infrastructure/BrowserMedia.cs" aria-pressed="false">BrowserMedia</button>
+<button type="button" class="arch-item arch-item--clickable" data-source="UnityProject/Assets/Plugins/WebGL/BrowserMedia.jslib" aria-pressed="false">BrowserMedia.jslib</button>
+                                </div>
+                            </div>
+<div class="arch-layer arch-layer--presentation">
+<div class="arch-layer__label">Presentation</div>
+<div class="arch-layer__items">
+<button type="button" class="arch-item arch-item--clickable" data-source="UnityProject/Assets/Scripts/Presentation/PinView.cs" aria-pressed="false">PinView</button>
+<button type="button" class="arch-item arch-item--clickable" data-source="UnityProject/Assets/Scripts/Presentation/PinEditPanel.cs" aria-pressed="false">PinEditPanel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+<div class="code__viewer" id="code-viewer" aria-busy="true">
+<div class="code__viewer-heading">
+<div>
+                                <span class="code__eyebrow" id="code-file-group">Bootstrap / C#</span>
+<h3 id="code-file-name">GameInstaller.cs</h3>
+                            </div>
+<button type="button" class="code__copy" id="copy-code" disabled>Copy code</button>
+                        </div>
+<p class="code__scroll-hint">Scroll sideways to read the code ↔</p>
+<pre class="code__pre">
+<code id="code-source" class="language-csharp">Loading source…</code></pre>
+<div class="code__viewer-footer">
+                            <span>Current MapPinner source</span>
+<a href="https://github.com/SemenMalyshev/MapPinner" target="_blank" rel="noopener noreferrer">GitHub repository ↗</a>
+                        </div>
+                        <span class="code__status" id="code-status" role="status" aria-live="polite"></span>
+                    </div>
+                </div>
+</details>
+            </div>
+        </section>
+<section id="skills" class="section skills">
+<div class="container">
+<h2 class="section-title animate-on-scroll">Skills</h2>
+<div id="about" class="profile-intro">
+<p><strong>Project-based development since 2022.</strong> I work on new and existing Unity projects: gameplay, bug fixes, WebGL ports and release builds. I have worked in teams with responsibility split across gameplay systems.</p></div>
+<div class="skills__grid">
+<div class="skill-category animate-on-scroll">
+<div class="skill-category__header"><span class="skill-category__icon" aria-hidden="true">🎮</span>
+<h3 class="skill-category__title">Unity & C#</h3></div>
+<div class="skill-category__tags"><span class="skill-tag">C# / LINQ / async-await</span><span class="skill-tag">DI</span><span class="skill-tag">Unity UI / uGUI</span><span class="skill-tag">Addressables / Asset Bundles</span><span class="skill-tag">DOTween</span><span class="skill-tag">ECS (Entities)</span></div></div>
+<div class="skill-category animate-on-scroll">
+<div class="skill-category__header"><span class="skill-category__icon" aria-hidden="true">📦</span>
+<h3 class="skill-category__title">Builds and integrations</h3></div>
+<div class="skill-category__tags"><span class="skill-tag">WebGL / Mobile / PC</span><span class="skill-tag">YandexSDK</span><span class="skill-tag">MirraSDK</span><span class="skill-tag">Playgamma SDK</span><span class="skill-tag">Build optimization</span></div></div>
+<div class="skill-category animate-on-scroll">
+<div class="skill-category__header"><span class="skill-category__icon" aria-hidden="true">🌐</span>
+<h3 class="skill-category__title">Web</h3></div>
+<div class="skill-category__tags"><span class="skill-tag">JavaScript / TypeScript — basic</span><span class="skill-tag">HTML / CSS</span><span class="skill-tag">REST API</span><span class="skill-tag">WebSocket</span></div></div>
+<div class="skill-category animate-on-scroll">
+<div class="skill-category__header"><span class="skill-category__icon" aria-hidden="true">🛠</span>
+<h3 class="skill-category__title">Tools</h3></div>
+<div class="skill-category__tags"><span class="skill-tag">Git / GitHub / Git Flow</span><span class="skill-tag">Visual Studio / VS Code</span><span class="skill-tag">AI coding assistants and agent tools</span></div></div>
+        </div>
+<details class="case-details" style="margin-top:24px">
+<summary>Additional tools</summary>
+<div class="case-details__body">
+<div class="skill-category__tags"><span class="skill-tag">Figma</span><span class="skill-tag">Photoshop</span><span class="skill-tag">Blender</span><span class="skill-tag">Aseprite</span><span class="skill-tag">Python — basic</span><span class="skill-tag">Telegram bots in C# / .NET</span><span class="skill-tag">Responsive layouts</span></div></div></details>
+    </div></section>
+<section id="experience" class="section experience">
+<div class="container">
+<h2 class="section-title animate-on-scroll">Experience</h2>
+<p class="section-subtitle">Project work, original games and teaching.</p>
+<div class="experience__timeline">
+<div class="timeline__item animate-on-scroll">
+<div class="timeline__marker"></div>
+<div class="timeline__card">
+<h3 class="timeline__title">Developer — QR-Games</h3><span class="timeline__period">2025 — present</span>
+<p class="timeline__description">Independent development and release of the platform’s Unity games. Work on multiplayer, the web platform, website and server.</p>
+<div class="timeline__tags"><span class="skill-tag">Unity</span><span class="skill-tag">C#</span><span class="skill-tag">WebGL</span><span class="skill-tag">WebSocket</span></div></div></div>
+<div class="timeline__item animate-on-scroll">
+<div class="timeline__marker"></div>
+<div class="timeline__card">
+<h3 class="timeline__title">Unity Developer — MirraGames</h3><span class="timeline__period">February – July 2026 · project-based collaboration</span>
+<p class="timeline__description">Paid project work on <a href="https://yandex.ru/games/app/kradi-i-lovi-obbi-mini-igry-494695" target="_blank" rel="noopener noreferrer" class="">Steal and Catch Obby: Mini-Games <span aria-hidden="true">↗</span></a>.</p>
+<div class="timeline__tags"><span class="skill-tag">Unity</span><span class="skill-tag">WebGL</span></div></div></div>
+<div class="timeline__item animate-on-scroll">
+<div class="timeline__marker"></div>
+<div class="timeline__card">
+<h3 class="timeline__title">Unity Developer — Hidden Miracles Studio</h3><span class="timeline__period">April – June 2026 · project-based collaboration</span>
+<p class="timeline__description">Paid project work on <a href="https://yandex.ru/games/app/scary-shawarma-kiosk-504555?lang=ru" target="_blank" rel="noopener noreferrer" class="">Scary Shawarma Kiosk <span aria-hidden="true">↗</span></a>.</p>
+<div class="timeline__tags"><span class="skill-tag">Unity</span><span class="skill-tag">WebGL</span></div></div></div>
+<div class="timeline__item animate-on-scroll">
+<div class="timeline__marker"></div>
+<div class="timeline__card">
+<h3 class="timeline__title">Project-based Unity development</h3><span class="timeline__period">2022 — 2025</span>
+<p class="timeline__description">Paid assignments for small game studios: Unity development and maintenance, optimization, asset work and SDK integration.</p>
+<div class="timeline__tags"><span class="skill-tag">Unity</span><span class="skill-tag">C#</span><span class="skill-tag">Addressables</span><span class="skill-tag">SDK</span></div></div></div>
+<div class="timeline__item animate-on-scroll">
+<div class="timeline__marker"></div>
+<div class="timeline__card">
+<h3 class="timeline__title">Publishing games on Yandex Games</h3><span class="timeline__period">2024 — 2025</span>
+<p class="timeline__description">Unity browser builds, YandexSDK integration and game publishing on the platform.</p>
+<div class="timeline__tags"><span class="skill-tag">Unity</span><span class="skill-tag">YandexSDK</span><span class="skill-tag">WebGL</span></div></div></div>
+<div class="timeline__item animate-on-scroll">
+<div class="timeline__marker"></div>
+<div class="timeline__card">
+<h3 class="timeline__title">IT instructor — Academy TOP</h3><span class="timeline__period">March 2026 — present</span>
+<p class="timeline__description">I teach foundational and advanced development skills to beginners and experienced developers. I teach Unity and C#, supervise graduation projects and prepare course materials. I also teach Blender, SketchUp, Tinkercad, Python and other IT subjects.</p>
+<div class="timeline__tags"><span class="skill-tag">Unity</span><span class="skill-tag">C#</span><span class="skill-tag">Course materials</span></div></div></div></div></div></section>
+<section id="education" class="section education">
+<div class="container">
+<h2 class="section-title animate-on-scroll">Education</h2>
+<div class="experience__timeline">
+<div class="timeline__item animate-on-scroll">
+<div class="timeline__marker"></div>
+<div class="timeline__card">
+<h3 class="timeline__title">Law</h3><span class="timeline__period">2022</span>
+<p class="timeline__description">Krasnodar University of the Ministry of Internal Affairs of the Russian Federation, Krasnodar.</p>
+<div class="timeline__tags"></div></div></div>
+<div class="timeline__item animate-on-scroll">
+<div class="timeline__marker"></div>
+<div class="timeline__card">
+<h3 class="timeline__title">Academy TOP · professional development</h3><span class="timeline__period">2026</span>
+<p class="timeline__description">School of Teachers 3.0. Work with the Small Computer Academy and First Step programs.</p>
+<div class="timeline__tags"></div></div></div></div></div></section>
+<section id="contact" class="section contact">
+<div class="container">
+<h2 class="section-title animate-on-scroll">Let’s talk</h2>
+<p class="section-subtitle">Open to development opportunities, remotely or in St Petersburg. Get in touch to discuss the work and arrangement.</p>
+<div class="contact__grid">
+<div class="contact__info">
+<div class="contact__item"><span class="contact__icon" aria-hidden="true">📧</span>
+<a href="mailto:d3veloperg@yandex.ru" class="contact__link">d3veloperg@yandex.ru</a></div>
+<div class="contact__item"><span class="contact__icon" aria-hidden="true">💬</span>
+<a href="https://t.me/d3veloperg" class="contact__link" target="_blank" rel="noopener noreferrer">@d3veloperg</a></div>
+<div class="contact__item"><span class="contact__icon" aria-hidden="true">📞</span>
+<a href="tel:+79155728178" class="contact__link">+7 915 572-81-78</a></div>
+<div class="contact__item"><span class="contact__icon" aria-hidden="true">💻</span>
+<a href="https://github.com/SemenMalyshev" class="contact__link" target="_blank" rel="noopener noreferrer">github.com/SemenMalyshev</a></div>
+<div class="contact__item"><span class="contact__icon" aria-hidden="true">📺</span>
+<a href="https://rutube.ru/channel/78499030" class="contact__link" target="_blank" rel="noopener noreferrer">Rutube channel</a></div></div></div></div></section>
+    </main>
+<dialog id="map-demo" class="map-demo" aria-labelledby="map-demo-title">
+<div class="map-demo__header">
+<div>
+<h2 id="map-demo-title">MapPinner</h2>
+<p>Unity test project · data is stored in your browser</p>
+            </div>
+<button type="button" id="close-map-demo" class="map-demo__close" aria-label="Close MapPinner">×</button>
+        </div>
+<div class="map-demo__stage">
+<canvas id="map-demo-canvas" width="960" height="600" tabindex="0" aria-label="Interactive MapPinner map"></canvas>
+<div id="map-demo-status" class="map-demo__status" role="status" aria-live="polite">Preparing demo…</div>
+        </div>
+<p class="map-demo__hint">Mouse: click to add a pin, hold to move it, right-drag to pan, scroll to zoom. Touch: tap to add a pin, hold to move it, use gestures to pan and zoom.</p>
+    </dialog>
+<footer class="footer">
+<div class="container footer__inner"><span>Semen Malyshev · Unity Developer</span>
+<a href="#hero">Back to top ↑</a></div></footer>
+<button type="button" class="scroll-top" id="scrollTop" aria-label="Back to top">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M18 15l-6-6-6 6"/></svg></button>
+<script src="js/main.js" type="module"></script>
+<script src="js/animations.js" type="module"></script>
+<script src="js/map-demo.js" type="module"></script>
+</body></html>

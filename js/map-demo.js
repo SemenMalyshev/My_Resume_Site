@@ -12,13 +12,13 @@ const closeButton = document.getElementById('close-map-demo');
 const dialog = document.getElementById('map-demo');
 const canvas = document.getElementById('map-demo-canvas');
 const status = document.getElementById('map-demo-status');
+const t = window.portfolioText;
 
 if (openButton && closeButton && dialog && canvas && status) {
     let loaderPromise;
     let loadingPromise;
     let unityInstance;
     let closing = Promise.resolve();
-    const prefetchController = new AbortController();
 
     function loadScript() {
         if (!loaderPromise) {
@@ -26,7 +26,7 @@ if (openButton && closeButton && dialog && canvas && status) {
                 const script = document.createElement('script');
                 script.src = assets[0];
                 script.onload = resolve;
-                script.onerror = () => reject(new Error('Не удалось загрузить Unity WebGL.'));
+                script.onerror = () => reject(new Error(t('unityFailed')));
                 document.head.append(script);
             });
         }
@@ -44,16 +44,15 @@ if (openButton && closeButton && dialog && canvas && status) {
             productName: 'MapPinner',
             productVersion: '1.0',
         }, (progress) => {
-            status.textContent = `Загрузка MapPinner: ${Math.round(progress * 100)} % · первый запуск загружает около 18 МБ`;
+            status.textContent = t('demoProgress', { progress: Math.round(progress * 100) });
         });
     }
 
     openButton.addEventListener('click', async () => {
-        prefetchController.abort();
         dialog.showModal();
         document.body.classList.add('map-demo-open');
         status.hidden = false;
-        status.textContent = 'Подготовка демо… Первый запуск загружает около 18 МБ.';
+        status.textContent = t('demoPreparing');
         await closing;
         if (!dialog.open) return;
 
@@ -62,7 +61,7 @@ if (openButton && closeButton && dialog && canvas && status) {
             unityInstance = await loadingPromise;
             if (dialog.open) status.hidden = true;
         } catch (error) {
-            status.textContent = 'Не удалось запустить демо. Попробуйте обновить страницу.';
+            status.textContent = t('demoFailed');
             console.error('[MapPinner] WebGL failed:', error);
         }
     });
@@ -80,28 +79,4 @@ if (openButton && closeButton && dialog && canvas && status) {
         })();
     });
 
-    async function prefetchDemo() {
-        if (navigator.connection?.saveData || prefetchController.signal.aborted) return;
-        for (const url of assets) {
-            if (prefetchController.signal.aborted) break;
-            try {
-                const response = await fetch(url, { priority: 'low', signal: prefetchController.signal });
-                if (!response.ok) break;
-                if (response.body) {
-                    const reader = response.body.getReader();
-                    while (!(await reader.read()).done) { /* drain into the browser cache */ }
-                } else {
-                    await response.blob();
-                }
-            } catch (error) {
-                if (error.name !== 'AbortError') console.debug('[MapPinner] Background preload unavailable:', error);
-                break;
-            }
-        }
-    }
-
-    window.addEventListener('load', () => {
-        if ('requestIdleCallback' in window) window.requestIdleCallback(prefetchDemo, { timeout: 5000 });
-        else window.setTimeout(prefetchDemo, 1500);
-    });
 }

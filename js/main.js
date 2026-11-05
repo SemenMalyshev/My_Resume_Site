@@ -3,8 +3,9 @@
  * Unity Developer Portfolio
  */
 
+const t = window.portfolioText;
+
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('[Main] Страница загружена и готова к работе.');
 
     // Инициализация модулей
     initTheme();
@@ -32,12 +33,13 @@ function initTheme() {
         // Если тема light — кнопка 🌙 (предлагает переключить на тёмную)
         toggle.textContent = theme === 'dark' ? '☀️' : '🌙';
         if (save) {
-            localStorage.setItem('theme', theme);
+            try { localStorage.setItem('theme', theme); } catch { /* Theme still works without storage. */ }
         }
     }
 
     // Определяем начальную тему
-    const savedTheme = localStorage.getItem('theme');
+    let savedTheme;
+    try { savedTheme = localStorage.getItem('theme'); } catch { /* Use the system preference. */ }
     if (savedTheme) {
         setTheme(savedTheme, false);
     } else {
@@ -54,7 +56,9 @@ function initTheme() {
 
     // Слушаем изменение системной темы (если нет сохранённой)
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-        if (!localStorage.getItem('theme')) {
+        let stored;
+        try { stored = localStorage.getItem('theme'); } catch { /* Follow the system preference. */ }
+        if (!stored) {
             setTheme(e.matches ? 'dark' : 'light', false);
         }
     });
@@ -82,11 +86,11 @@ function initCodeNavigation() {
         const isJavaScript = path.endsWith('.jslib');
         fileName.textContent = path.split('/').pop();
         fileGroup.textContent = `${button.closest('.arch-layer').querySelector('.arch-layer__label').textContent} / ${isJavaScript ? 'JavaScript' : 'C#'}`;
-        sourceBlock.textContent = 'Загрузка кода…';
+        sourceBlock.textContent = t('loading');
         sourceBlock.className = isJavaScript ? 'language-javascript' : 'language-csharp';
         sourceBlock.removeAttribute('data-highlighted');
         copyButton.disabled = true;
-        copyButton.textContent = 'Копировать';
+        copyButton.textContent = t('copy');
         status.textContent = '';
         viewer.setAttribute('aria-busy', 'true');
 
@@ -105,11 +109,11 @@ function initCodeNavigation() {
             sourceBlock.textContent = source;
             if (window.hljs) window.hljs.highlightElement(sourceBlock);
             copyButton.disabled = false;
-            status.textContent = `Открыт файл ${fileName.textContent}`;
+            status.textContent = t('opened', { file: fileName.textContent });
         } catch (error) {
             if (currentRequest !== requestNumber) return;
-            sourceBlock.textContent = 'Не удалось загрузить файл. Откройте исходный код на GitHub.';
-            status.textContent = 'Не удалось загрузить файл';
+            sourceBlock.textContent = t('sourceFailed');
+            status.textContent = t('loadFailed');
             console.error('[Code viewer] Failed to load source:', error);
         } finally {
             if (currentRequest === requestNumber) viewer.setAttribute('aria-busy', 'false');
@@ -124,15 +128,26 @@ function initCodeNavigation() {
     copyButton.addEventListener('click', async () => {
         try {
             await navigator.clipboard.writeText(sourceBlock.textContent);
-            copyButton.textContent = 'Скопировано';
-            status.textContent = `Скопирован файл ${fileName.textContent}`;
+            copyButton.textContent = t('copied');
+            status.textContent = t('copiedFile', { file: fileName.textContent });
         } catch (error) {
-            status.textContent = 'Не удалось скопировать код';
+            status.textContent = t('copyFailed');
             console.error('[Code viewer] Failed to copy source:', error);
         }
     });
 
-    showFile(buttons[0]);
+    const disclosure = fileList.closest('details');
+    if (disclosure && !disclosure.open) {
+        let initialized = false;
+        disclosure.addEventListener('toggle', () => {
+            if (disclosure.open && !initialized) {
+                initialized = true;
+                showFile(buttons[0]);
+            }
+        });
+    } else {
+        showFile(buttons[0]);
+    }
 }
 
 /**
